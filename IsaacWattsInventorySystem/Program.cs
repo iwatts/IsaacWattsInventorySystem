@@ -10,8 +10,10 @@ namespace IsaacWattsInventorySystem
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            // ApplicationConfiguration.Initialize();
+            // TO DO
+            // Init - Data from SQL to Global
+            Application.Run(new InventoryView());
         }
     }
 }

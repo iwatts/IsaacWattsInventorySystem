@@ -1,6 +1,6 @@
 ﻿namespace IsaacWattsInventorySystem
 {
-    partial class Form1
+    partial class InventoryView
     {
         /// <summary>
         ///  Required designer variable.

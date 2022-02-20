@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IsaacWattsInventorySystem.models
 {
-    public class Global
+    public class Globals
     {
         public static int maxGlobalProductID { get; set; } = 0;
         public static int maxGlobalPartID { get; set; } = 0;

@@ -16,7 +16,7 @@ namespace IsaacWattsInventorySystem.models
         public int Min { get; set; }
         public int Max { get; set; }
 
-        public Global.sourceType SourceType { get; set; }
+        public Globals.sourceType SourceType { get; set; }
 
         public static BindingList<Part> parts = new BindingList<Part>();
 

@@ -1,8 +1,8 @@
 namespace IsaacWattsInventorySystem
 {
-    public partial class Form1 : Form
+    public partial class InventoryView : Form
     {
-        public Form1()
+        public InventoryView()
         {
             InitializeComponent();
         }
