@@ -20,7 +20,7 @@ namespace IsaacWattsInventorySystem.models
         public static BindingList<Product> products = new BindingList<Product>();
         private Product product;
 
-        public Product(Product product = null)
+        public Product(Product product)
         {
             if (!Object.ReferenceEquals(null, product)) { this.product = product; }
         }

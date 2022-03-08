@@ -10,9 +10,4 @@
 	<LangVersion>preview</LangVersion>
   </PropertyGroup>
 
-	
-  <ItemGroup>
-    <Folder Include="form\" />
-  </ItemGroup>
-
 </Project>
