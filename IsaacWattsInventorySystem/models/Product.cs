@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IsaacWattsInventorySystem.models
 {
-    class Product
+    public class Product
     {
         public int ProductID { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace IsaacWattsInventorySystem.models
         public static BindingList<Product> products = new BindingList<Product>();
         private Product product;
 
-        public Product(Product product)
+        public Product(Product product = null)
         {
             if (!Object.ReferenceEquals(null, product)) { this.product = product; }
         }

@@ -34,15 +34,20 @@ namespace IsaacWattsInventorySystem.forms
                 {
                     typedPartData = partData as InHouse;
                 }
+
+
+                if(typedPartData is InHouse)
+                {
+                    machineIDInput.Text = typedPartData.MachineID.ToString();
+                }else if(typedPartData is Outsource)
+                {
+                    companyNameInput.Text = typedPartData.CompanyName;
+                }
+            } else
+            {
+                partData = { }
             }
 
-            if(typedPartData is InHouse)
-            {
-                machineIDInput.Text = typedPartData.MachineID.ToString();
-            }else if(typedPartData is Outsource)
-            {
-                companyNameInput.Text = typedPartData.CompanyName;
-            }
 
             // set type to matching data if editing part
             if (partData is Part && partData is Outsource)
@@ -87,6 +92,17 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            if(partIDInput != null)
+            {
+                if(partData is Outsource)
+                {
+
+                }
+            }
+            else
+            {
+
+            }
             this.Close();
         }
     }

@@ -9,10 +9,46 @@ namespace IsaacWattsInventorySystem.models
 {
     class Outsource : Part
     {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public string CompanyName { get; set; }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         public static BindingList<Outsource> outsourceParts = new BindingList<Outsource>();
+
+        static Outsource()
+        {
+            outsourceParts.Add(new Outsource
+            {
+                PartID = 3,
+                Name = "Cog",
+                Price = 12.00f,
+                InStock = 3,
+                Min = 1,
+                Max = 5,
+                SourceType = Globals.sourceType.OutSource,
+                CompanyName = "Something Metal Inc"
+            });
+            outsourceParts.Add(new Outsource
+            {
+                PartID = 4,
+                Name = "Nut",
+                Price = 12.00f,
+                InStock = 3,
+                Min = 1,
+                Max = 5,
+                SourceType = Globals.sourceType.OutSource,
+                CompanyName = "Something Metal Inc"
+            });
+            outsourceParts.Add(new Outsource
+            {
+                PartID = 5,
+                Name = "Bolt",
+                Price = 12.00f,
+                InStock = 3,
+                Min = 1,
+                Max = 5,
+                SourceType = Globals.sourceType.OutSource,
+                CompanyName = "Something Metal Inc"
+            });
+
+        }
     }
 }

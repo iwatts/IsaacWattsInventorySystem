@@ -15,7 +15,7 @@ namespace IsaacWattsInventorySystem.forms
     {
         private BindingList<Part> productParts;
 
-        private ProductForm(int productID, Product productData)
+        public ProductForm(int productID, Product productData)
         {
             InitializeComponent();
 

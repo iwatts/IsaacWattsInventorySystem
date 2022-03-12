@@ -239,4 +239,3 @@
         private System.Windows.Forms.TextBox textSearchPart;
     }
 }
-}

@@ -44,7 +44,7 @@ namespace IsaacWattsInventorySystem
             private void modifyProductButton_Click(object sender, EventArgs e)
             {
                 // load "modify" product form (create form with inputs loaded from selected product)
-                if (dataGridProducts.CurrentRow.Selected)
+                if (dataGridProducts.RowCount > 0 && dataGridProducts.CurrentRow.Selected)
                 {
                     int productID = (int)dataGridProducts.CurrentRow.Cells["ProductID"].Value;
                     Product productData = (Product)dataGridProducts.CurrentRow.DataBoundItem;
@@ -98,7 +98,7 @@ namespace IsaacWattsInventorySystem
             private void modifyPartButton_Click(object sender, EventArgs e)
             {
                 // load "modify" part form (create form with inputs loaded from selected part)
-                if (dataGridParts.CurrentRow.Selected)
+                if (dataGridParts.RowCount > 0 && dataGridParts.CurrentRow.Selected)
                 {
                     int partID = (int)dataGridParts.CurrentRow.Cells["PartID"].Value;
                     Part partData = (Part)dataGridParts.CurrentRow.DataBoundItem;
