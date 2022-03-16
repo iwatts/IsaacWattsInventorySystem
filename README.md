@@ -73,12 +73,12 @@ Now that you’ve created the GUI, write code to create the class structure prov
    - search for a part or product and display matching results
    - exit the main form
 8. Add the following functionalities to the part forms, using the methods provided in the attached “UML Class Diagram”:
-   1. “Add Part” form
+   - “Add Part” form
       - select “In-House” or “Outsourced”
       - enter name, inventory level, price, max and min values, and company name or machine ID
       - save the data and then redirect to the main form
       - cancel or exit out of this form and go back to the main form
-   2. “Modify Part” form
+   - “Modify Part” form
       - select “In-House” or “Outsourced”
       - modify or change data values
       - save modifications to the data and then redirect to the main form
