@@ -94,11 +94,11 @@ III.  Add the following functionalities to the product forms, using the methods 
    - remove or disassociate a part from a product
    - cancel or exit out of this form and go back to the main form
 10. “Modify Product” form
-   - modify or change data values
-   - save modifications to the data and then redirect to the main form
-   - associate one or more parts with a product
-   - remove or disassociate a part from a product
-   - cancel or exit out of this form and go back to the main form
+    - modify or change data values
+    - save modifications to the data and then redirect to the main form
+    - associate one or more parts with a product
+    - remove or disassociate a part from a product
+    - cancel or exit out of this form and go back to the main form
 11. Write code to address the following conditions with exception handling code:
     - Detect non-numeric values in textboxes that expect numeric values
     - Min should be less than Max; and Inv should be between those two values
