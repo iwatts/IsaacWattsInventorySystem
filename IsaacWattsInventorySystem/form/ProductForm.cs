@@ -35,7 +35,17 @@ namespace IsaacWattsInventorySystem.forms
             productIDInput.Text = productID.ToString();
 
             BindingSource includedItemsFiltered = new BindingSource();
-            includedItemsFiltered.DataSource = Part.parts;
+            (includedItemsFiltered.DataSource as Part.parts)Filter = (unfiltered) =>
+                {
+                foreach (productPart in productPartsGrid.DataSource)
+                    {
+                        DataRow partsRow = ((System.Data.DataRowView)(unfiltered)).Row;
+                        if (partsRow["PartID"].ToString().ToUpper().Contains(productPart["PartID"].ToString().ToUpper()))
+                            return false; // if it's already part of the product, don't show it
+                        return true;
+                    }
+                };         
+            )
 
             allPartsGrid.DataSource = includedItemsFiltered;
             allPartsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
