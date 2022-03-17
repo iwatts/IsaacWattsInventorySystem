@@ -13,11 +13,12 @@ namespace IsaacWattsInventorySystem.forms
 {
     public partial class PartForm : Form
     {
-        public PartForm(int partID, Part partData)
+        public PartForm(int partID, Part partData, int rowIndex = -1)
         {
             InitializeComponent();
 
             partIDInput.Text = partID.ToString();
+            dataGridRowIndex = rowIndex;
             dynamic typedPartData = null;
             if (partData is Part)
             {
@@ -92,15 +93,63 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if(partIDInput != null)
+            if(rowIndex > 0)
             {
-                if(partData is Outsource)
+                if(CompanyNameButton.Checked)
                 {
-
+                    dataGridParts.Rows.SetValues(new Outsource{
+                        PartID = this.partIDInput,
+                        Name = this.partNameInput.Text,
+                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        InStock = Int32.Parse(this.stockInput.Text),
+                        Min = Int32.Parse(this.partMinInput.Text),
+                        Max = Int32.Parse(this.partMaxInput.Text)
+                        SourceType = Globals.sourceType.OutSource,
+                        CompanyName = this.companyNameInput
+                    });
+                }else
+                {
+                    dataGridParts.Rows.SetValues(new InHouse{
+                        PartID = this.partIDInput,
+                        Name = this.partNameInput.Text,
+                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        InStock = Int32.Parse(this.stockInput.Text),
+                        Min = Int32.Parse(this.partMinInput.Text),
+                        Max = Int32.Parse(this.partMaxInput.Text)
+                        SourceType = Globals.sourceType.InHouse,
+                        MachineID = this.machineIDInput
+                    });
                 }
             }
             else
             {
+                newID = Globals.maxGlobalPartID
+                if(CompanyNameButton.Checked)
+                {
+                    dataGridParts.Rows.Add(new Outsource{
+                        PartID = this.partIDInput,
+                        Name = this.partNameInput.Text,
+                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        InStock = Int32.Parse(this.stockInput.Text),
+                        Min = Int32.Parse(this.partMinInput.Text),
+                        Max = Int32.Parse(this.partMaxInput.Text)
+                        SourceType = Globals.sourceType.OutSource,
+                        CompanyName = this.companyNameInput
+                    });
+                }else
+                {
+                    dataGridParts.Rows.Add(new InHouse{
+                        PartID = this.partIDInput,
+                        Name = this.partNameInput.Text,
+                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        InStock = Int32.Parse(this.stockInput.Text),
+                        Min = Int32.Parse(this.partMinInput.Text),
+                        Max = Int32.Parse(this.partMaxInput.Text)
+                        SourceType = Globals.sourceType.InHouse,
+                        MachineID = this.machineIDInput
+                    });
+                }
+                Globals.maxGlobalPartID ++;
 
             }
             this.Close();

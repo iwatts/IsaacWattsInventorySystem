@@ -102,7 +102,7 @@ namespace IsaacWattsInventorySystem
                 {
                     int partID = (int)dataGridParts.CurrentRow.Cells["PartID"].Value;
                     Part partData = (Part)dataGridParts.CurrentRow.DataBoundItem;
-                    PartForm modifyPart = new PartForm(partID, partData);
+                    PartForm modifyPart = new PartForm(partID, partData, dataGridParts.CurrentRow.Index);
                     modifyPart.Owner = this;
                     modifyPart.Show();
                 }
