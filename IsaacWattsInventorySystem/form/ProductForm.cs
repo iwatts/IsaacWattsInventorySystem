@@ -21,6 +21,7 @@ namespace IsaacWattsInventorySystem.forms
 
             productIDInput.Text = productID.ToString();
             dataGridRowIndex = rowIndex;
+            backupPartList = null;
 
             if (productData is Product)
             {
@@ -34,6 +35,8 @@ namespace IsaacWattsInventorySystem.forms
                 productParts = new BindingList<Part>(productData.AssociatedParts);
                 productPartsGrid.DataSource = productParts;
 
+                backupPartList = new List<Part>(productParts);
+
             }
 
             BindingSource allPartItems = new BindingSource();
@@ -46,7 +49,6 @@ namespace IsaacWattsInventorySystem.forms
             allPartsGrid.MultiSelect = false;
             allPartsGrid.AllowUserToAddRows = false;
 
-            productIDInput.Text = productID.ToString();
         }
 
         private void addPartToProduct(object sender, DataGridViewCellEventArgs e)
@@ -67,7 +69,7 @@ namespace IsaacWattsInventorySystem.forms
             }
         }
 
-        private Part submitPart(object sender, EventArgs e)
+        private Part submitButton_Click(object sender, EventArgs e)
         {
 
             if(dataGridRowIndex > 0)
@@ -89,7 +91,7 @@ namespace IsaacWattsInventorySystem.forms
                     ProductID = this.newID.toString(),
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
-                    InStock = int.Parse(this.ProductStockInput),
+                    InStock = int.Parse(this.ProductStockInput.Text),
                     Min = int.Parse(this.productMinInput.Text),
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
@@ -100,6 +102,10 @@ namespace IsaacWattsInventorySystem.forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            if(productData is Product)
+            {
+                productParts = new BindingList<Part>(backupPartList);
+            }
             this.Close();
         }
 
