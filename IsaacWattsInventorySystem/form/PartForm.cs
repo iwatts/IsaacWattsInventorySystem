@@ -93,14 +93,14 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if(rowIndex > 0)
+            if(dataGridRowIndex > 0)
             {
                 if(CompanyNameButton.Checked)
                 {
-                    dataGridParts.Rows.SetValues(new Outsource{
-                        PartID = this.partIDInput,
+                    dataGridParts.Rows[dataGridRowIndex].SetValues(new Outsource{
+                        PartID = this.partIDInput.Text,
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = Int32.Parse(this.stockInput.Text),
                         Min = Int32.Parse(this.partMinInput.Text),
                         Max = Int32.Parse(this.partMaxInput.Text)
@@ -109,10 +109,10 @@ namespace IsaacWattsInventorySystem.forms
                     });
                 }else
                 {
-                    dataGridParts.Rows.SetValues(new InHouse{
-                        PartID = this.partIDInput,
+                    dataGridParts.Rows[dataGridRowIndex].SetValues(new InHouse{
+                        PartID = this.partIDInput.Text,
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = Int32.Parse(this.stockInput.Text),
                         Min = Int32.Parse(this.partMinInput.Text),
                         Max = Int32.Parse(this.partMaxInput.Text)
@@ -127,7 +127,7 @@ namespace IsaacWattsInventorySystem.forms
                 if(CompanyNameButton.Checked)
                 {
                     dataGridParts.Rows.Add(new Outsource{
-                        PartID = this.partIDInput,
+                        PartID = this.newID.toString(),
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = Int32.Parse(this.stockInput.Text),
@@ -139,7 +139,7 @@ namespace IsaacWattsInventorySystem.forms
                 }else
                 {
                     dataGridParts.Rows.Add(new InHouse{
-                        PartID = this.partIDInput,
+                        PartID = this.newID.toString(),
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = Int32.Parse(this.stockInput.Text),

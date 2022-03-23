@@ -15,9 +15,12 @@ namespace IsaacWattsInventorySystem.forms
     {
         private BindingList<Part> productParts;
 
-        public ProductForm(int productID, Product productData)
+        public ProductForm(int productID, Product productData, int rowIndex = -1)
         {
             InitializeComponent();
+
+            productIDInput.Text = productID.ToString();
+            dataGridRowIndex = rowIndex;
 
             if (productData is Product)
             {
@@ -32,7 +35,6 @@ namespace IsaacWattsInventorySystem.forms
                 productPartsGrid.DataSource = productParts;
 
             }
-            productIDInput.Text = productID.ToString();
 
             BindingSource includedItemsFiltered = new BindingSource();
             (includedItemsFiltered.DataSource as Part.parts)Filter = (unfiltered) =>
@@ -76,8 +78,33 @@ namespace IsaacWattsInventorySystem.forms
 
         private Part submitPart(object sender, EventArgs e)
         {
-            Part data = null;
-            return data;
+
+            if(dataGridRowIndex > 0)
+            {
+                dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product{
+                    ProductID = this.productIDInput.Text,
+                    Name = this.productNameInput.Text,
+                    Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    InStock = int.Parse(this.ProductStockInput.Text),
+                    Min = int.Parse(this.productMinInput.Text),
+                    Max = int.Parse(this.productMaxInput.Text),
+                    AssociatedParts = productParts
+                });
+                 
+            } else
+            {
+                newID = Globals.maxGlobalProductID;
+                dataGridProducts.Rows.Add(new Product{
+                    ProductID = this.newID.toString(),
+                    Name = this.productNameInput.Text,
+                    Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    InStock = int.Parse(this.ProductStockInput),
+                    Min = int.Parse(this.productMinInput.Text),
+                    Max = int.Parse(this.productMaxInput.Text),
+                    AssociatedParts = productParts
+                });
+                Globals.maxGlobalProductID ++;
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
