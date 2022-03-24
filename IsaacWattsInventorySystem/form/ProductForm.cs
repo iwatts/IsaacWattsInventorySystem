@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,14 +15,16 @@ namespace IsaacWattsInventorySystem.forms
     public partial class ProductForm : Form
     {
         private BindingList<Part> productParts;
+        private int dataGridRowIndex { get; set; }
+        public List<Part> backupPartList { get; private set; }
 
         public ProductForm(int productID, Product productData, int rowIndex = -1)
         {
             InitializeComponent();
 
             productIDInput.Text = productID.ToString();
-            dataGridRowIndex = rowIndex;
-            backupPartList = null;
+            int dataGridRowIndex = rowIndex;
+            List<Part> backupPartList = null;
 
             if (productData is Product)
             {
@@ -69,13 +72,13 @@ namespace IsaacWattsInventorySystem.forms
             }
         }
 
-        private Part submitButton_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
 
             if(dataGridRowIndex > 0)
             {
                 dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product{
-                    ProductID = this.productIDInput.Text,
+                    ProductID = int.Parse(this.productIDInput.Text),
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(this.ProductStockInput.Text),
@@ -86,9 +89,9 @@ namespace IsaacWattsInventorySystem.forms
                  
             } else
             {
-                newID = Globals.maxGlobalProductID;
+                int newID = Globals.maxGlobalProductID;
                 dataGridProducts.Rows.Add(new Product{
-                    ProductID = this.newID.toString(),
+                    ProductID = newID,
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(this.ProductStockInput.Text),
@@ -102,7 +105,7 @@ namespace IsaacWattsInventorySystem.forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if(productData is Product)
+            if(backupPartList is List<Part>)
             {
                 productParts = new BindingList<Part>(backupPartList);
             }

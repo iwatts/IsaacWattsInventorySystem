@@ -222,8 +222,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridProducts;
-        private System.Windows.Forms.DataGridView dataGridParts;
+        public System.Windows.Forms.DataGridView dataGridProducts;
+        public System.Windows.Forms.DataGridView dataGridParts;
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Button ModifyProduct;
         private System.Windows.Forms.Button AddProduct;
