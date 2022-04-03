@@ -30,19 +30,21 @@ namespace IsaacWattsInventorySystem.forms
                 stockInput.Text = partData.InStock.ToString();
                 partMinInput.Text = partData.Min.ToString();
                 partMaxInput.Text = partData.Max.ToString();
-                if(partData.SourceType == Globals.sourceType.OutSource)
+                if (partData.SourceType == Globals.sourceType.OutSource)
                 {
                     typedPartData = partData as Outsource;
-                } else
+                }
+                else
                 {
                     typedPartData = partData as InHouse;
                 }
 
 
-                if(typedPartData is InHouse)
+                if (typedPartData is InHouse)
                 {
                     machineIDInput.Text = typedPartData.MachineID.ToString();
-                }else if(typedPartData is Outsource)
+                }
+                else if (typedPartData is Outsource)
                 {
                     companyNameInput.Text = typedPartData.CompanyName;
                 }
@@ -53,7 +55,8 @@ namespace IsaacWattsInventorySystem.forms
             if (partData is Part && partData is Outsource)
             {
                 CompanyNameButton.Checked = true;
-            } else
+            }
+            else
             {
                 MachineIDButton.Checked = true;
             }
@@ -69,20 +72,21 @@ namespace IsaacWattsInventorySystem.forms
 
         private void toggleInOrOutsource(object sender, EventArgs e)
         {
-           if (CompanyNameButton.Checked)
+            if (CompanyNameButton.Checked)
             {
                 this.companyNameLabel.Visible = true;
                 this.companyNameInput.Visible = true;
                 this.machineIDLabel.Visible = false;
                 this.machineIDInput.Visible = false;
-            } else
+            }
+            else
             {
                 this.companyNameLabel.Visible = false;
                 this.companyNameInput.Visible = false;
                 this.machineIDLabel.Visible = true;
                 this.machineIDInput.Visible = true;
             }
-            
+
         }
 
         private void PartForm_Closing(object sender, FormClosingEventArgs e)
@@ -92,11 +96,12 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if(dataGridRowIndex > 0)
+            if (dataGridRowIndex > 0)
             {
-                if(CompanyNameButton.Checked)
+                if (CompanyNameButton.Checked)
                 {
-                    dataGridParts.Rows[dataGridRowIndex].SetValues(new Outsource{
+                    dataGridParts.Rows[dataGridRowIndex].SetValues(new Outsource
+                    {
                         PartID = int.Parse(this.partIDInput.Text),
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -106,9 +111,11 @@ namespace IsaacWattsInventorySystem.forms
                         SourceType = Globals.sourceType.OutSource,
                         CompanyName = this.companyNameInput.Text
                     });
-                }else
+                }
+                else
                 {
-                    dataGridParts.Rows[dataGridRowIndex].SetValues(new InHouse{
+                    dataGridParts.Rows[dataGridRowIndex].SetValues(new InHouse
+                    {
                         PartID = int.Parse(this.partIDInput.Text),
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -125,7 +132,8 @@ namespace IsaacWattsInventorySystem.forms
                 int newID = Globals.maxGlobalPartID;
                 if (CompanyNameButton.Checked)
                 {
-                    dataGridParts.Rows.Add(new Outsource{
+                    dataGridParts.Rows.Add(new Outsource
+                    {
                         PartID = newID,
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -135,9 +143,11 @@ namespace IsaacWattsInventorySystem.forms
                         SourceType = Globals.sourceType.OutSource,
                         CompanyName = this.companyNameInput.Text
                     });
-                } else
+                }
+                else
                 {
-                    dataGridParts.Rows.Add(new InHouse{
+                    dataGridParts.Rows.Add(new InHouse
+                    {
                         PartID = newID,
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -148,7 +158,7 @@ namespace IsaacWattsInventorySystem.forms
                         MachineID = int.Parse(machineIDInput.Text)
                     });
                 }
-                Globals.maxGlobalPartID ++;
+                Globals.maxGlobalPartID++;
 
             }
             this.Close();

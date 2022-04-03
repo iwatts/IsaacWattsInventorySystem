@@ -44,7 +44,7 @@ namespace IsaacWattsInventorySystem.forms
 
             BindingSource allPartItems = new BindingSource();
             allPartItems.DataSource = productPartsGrid.DataSource;
-            
+
 
             allPartsGrid.DataSource = allPartItems;
             allPartsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -75,9 +75,10 @@ namespace IsaacWattsInventorySystem.forms
         private void SubmitButton_Click(object sender, EventArgs e)
         {
 
-            if(dataGridRowIndex > 0)
+            if (dataGridRowIndex > 0)
             {
-                dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product{
+                dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
+                {
                     ProductID = int.Parse(this.productIDInput.Text),
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -86,11 +87,13 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
                 });
-                 
-            } else
+
+            }
+            else
             {
                 int newID = Globals.maxGlobalProductID;
-                dataGridProducts.Rows.Add(new Product{
+                dataGridProducts.Rows.Add(new Product
+                {
                     ProductID = newID,
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -99,13 +102,13 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
                 });
-                Globals.maxGlobalProductID ++;
+                Globals.maxGlobalProductID++;
             }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if(backupPartList is List<Part>)
+            if (backupPartList is List<Part>)
             {
                 productParts = new BindingList<Part>(backupPartList);
             }
