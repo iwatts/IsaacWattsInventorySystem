@@ -3,9 +3,9 @@ using IsaacWattsInventorySystem.models;
 
 namespace IsaacWattsInventorySystem
 {
-    public partial class InventoryView : Form
+    public partial class Inventory : Form
     {
-        public InventoryView()
+        public Inventory()
         {
             InitializeComponent();
 
@@ -33,12 +33,39 @@ namespace IsaacWattsInventorySystem
             dataGridParts.ClearSelection();
         }
 
-        /***********  PRODUCTS FUNCTIONS ************/
+        /***********  DATA FUNCTIONS ************/
+
+        public static void addProduct(Product productData) { }
+        public static bool removeProduct(int productIndex) {
+            return false;
+        }
+        public static Product lookupProduct(int productIndex) {
+            return Product.products[productIndex];
+        }
+        public static void updateProduct(int productIndex, Product productData) {
+            Product.products[productIndex] = productData;
+            Product.products.ResetBindings();
+        }
+
+        public static void addPart(Part partData) { }
+        public static bool removePart(int partIndex) {
+            return false;
+        }
+        public static Part lookupPart(int partIndex) {
+            return Part.parts[partIndex];
+        }
+        public static void updatePart(int partIndex, Part partData) {
+            Part.parts[partIndex] = partData;
+            Part.parts.ResetBindings();
+
+        }
+
+        /***********  PRODUCTS GUI FUNCTIONS ************/
 
         private void ProductEditCell(object sender, DataGridViewCellEventArgs e)
         {
             // Double click to edit selected product
-            // this.modifyProductButton_Click(sender, e);
+            this.modifyProductButton_Click(sender, e);
         }
 
         private void modifyProductButton_Click(object sender, EventArgs e)
@@ -88,7 +115,7 @@ namespace IsaacWattsInventorySystem
             }
 
         }
-        /***********  PARTS FUNCTIONS ************/
+        /***********  PARTS GUI FUNCTIONS ************/
 
         private void PartEditCell(object sender, DataGridViewCellEventArgs e)
         {

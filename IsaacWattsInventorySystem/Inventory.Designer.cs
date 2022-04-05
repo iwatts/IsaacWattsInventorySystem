@@ -1,6 +1,6 @@
 ﻿namespace IsaacWattsInventorySystem
 {
-    partial class InventoryView
+    partial class Inventory
     {
         /// <summary>
         /// Required designer variable.

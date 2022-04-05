@@ -19,7 +19,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 3,
                 Name = "Cog",
-                Price = 12.00f,
+                Price = 11.00m,
                 InStock = 3,
                 Min = 1,
                 Max = 5,
@@ -30,10 +30,10 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 4,
                 Name = "Nut",
-                Price = 12.00f,
-                InStock = 3,
+                Price = 10.00m,
+                InStock = 13,
                 Min = 1,
-                Max = 5,
+                Max = 4,
                 SourceType = Globals.sourceType.OutSource,
                 CompanyName = "Something Metal Inc"
             });
@@ -41,10 +41,10 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 5,
                 Name = "Bolt",
-                Price = 12.00f,
-                InStock = 3,
+                Price = 12.00m,
+                InStock = 30,
                 Min = 1,
-                Max = 5,
+                Max = 3,
                 SourceType = Globals.sourceType.OutSource,
                 CompanyName = "Something Metal Inc"
             });

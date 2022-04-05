@@ -91,11 +91,10 @@ namespace IsaacWattsInventorySystem.forms
             {
                 if (CompanyNameButton.Checked)
                 {
-                    // dataGridParts.Rows[dataGridRowIndex].SetValues(new Outsource
-                    var updatedOutsourcePart = new Outsource {
+                    Part updatedOutsourcePart = new Outsource {
                         PartID = int.Parse(this.partIDInput.Text),
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(this.stockInput.Text),
                         Min = int.Parse(this.partMinInput.Text),
                         Max = int.Parse(this.partMaxInput.Text),
@@ -103,6 +102,7 @@ namespace IsaacWattsInventorySystem.forms
                         CompanyName = this.companyNameInput.Text
                     };
                     // inventory.updatePart(updatedOutsourcePart)
+                    Inventory.updatePart(dataGridRowIndex, updatedOutsourcePart);
                 }
                 else
                 {
@@ -110,13 +110,14 @@ namespace IsaacWattsInventorySystem.forms
                     var updatedInHousePart = new InHouse {
                         PartID = int.Parse(this.partIDInput.Text),
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(this.stockInput.Text),
                         Min = int.Parse(this.partMinInput.Text),
                         Max = int.Parse(this.partMaxInput.Text),
                         SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
-                    });
+                    };
+                    Inventory.updatePart(dataGridRowIndex, updatedInHousePart);
                 }
             }
             else
@@ -128,13 +129,13 @@ namespace IsaacWattsInventorySystem.forms
                     var newOutsourcePart = new Outsource {
                         PartID = newID,
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
-                        InStock = Int32.Parse(this.stockInput.Text),
-                        Min = Int32.Parse(this.partMinInput.Text),
-                        Max = Int32.Parse(this.partMaxInput.Text),
+                        Price = decimal.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        InStock = int.Parse(this.stockInput.Text),
+                        Min = int.Parse(this.partMinInput.Text),
+                        Max = int.Parse(this.partMaxInput.Text),
                         SourceType = Globals.sourceType.OutSource,
                         CompanyName = this.companyNameInput.Text
-                    });
+                    };
                 }
                 else
                 {
@@ -142,13 +143,13 @@ namespace IsaacWattsInventorySystem.forms
                     var newInHousePart = new InHouse {
                         PartID = newID,
                         Name = this.partNameInput.Text,
-                        Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(this.stockInput.Text),
                         Min = int.Parse(this.partMinInput.Text),
                         Max = int.Parse(this.partMaxInput.Text),
                         SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
-                    });
+                    };
                 }
                 Globals.maxGlobalPartID++;
 

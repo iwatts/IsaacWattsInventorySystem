@@ -19,7 +19,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 0,
                 Name = "Spring",
-                Price = 12.00f,
+                Price = 12.00m,
                 InStock = 3,
                 Min = 1,
                 Max = 5,
@@ -30,7 +30,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 1,
                 Name = "Gear",
-                Price = 12.00f,
+                Price = 12.00m,
                 InStock = 3,
                 Min = 1,
                 Max = 5,
@@ -41,7 +41,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 PartID = 2,
                 Name = "Pipe",
-                Price = 12.00f,
+                Price = 12.00m,
                 InStock = 3,
                 Min = 1,
                 Max = 5,

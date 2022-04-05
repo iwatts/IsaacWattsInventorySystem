@@ -72,12 +72,12 @@ namespace IsaacWattsInventorySystem.forms
                 var updatedProduct = new Product {
                     ProductID = int.Parse(this.productIDInput.Text),
                     Name = this.productNameInput.Text,
-                    Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    Price = decimal.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(this.ProductStockInput.Text),
                     Min = int.Parse(this.productMinInput.Text),
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
-                });
+                };
 
             }
             else
@@ -87,12 +87,12 @@ namespace IsaacWattsInventorySystem.forms
                 var newProduct = new Product {
                     ProductID = newID,
                     Name = this.productNameInput.Text,
-                    Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    Price = decimal.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(this.ProductStockInput.Text),
                     Min = int.Parse(this.productMinInput.Text),
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
-                });
+                };
                 Globals.maxGlobalProductID++;
             }
         }

@@ -11,7 +11,7 @@ namespace IsaacWattsInventorySystem.models
     {
         public int ProductID { get; set; }
         public string Name { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
         public int InStock { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
@@ -25,7 +25,7 @@ namespace IsaacWattsInventorySystem.models
             products.Add(new Product{
                 ProductID = 0,
                 Name = "Blue Bike",
-                Price = 12.00f,
+                Price = 12.00m,
                 InStock = 3,
                 Min = 1,
                 Max = 10,
@@ -35,7 +35,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 ProductID = 1,
                 Name = "Red Bike",
-                Price = 16.00f,
+                Price = 16.00m,
                 InStock = 8,
                 Min = 1,
                 Max = 50,
@@ -45,7 +45,7 @@ namespace IsaacWattsInventorySystem.models
             {
                 ProductID = 2,
                 Name = "Green Bike",
-                Price = 18.00f,
+                Price = 18.00m,
                 InStock = 8,
                 Min = 1,
                 Max = 20,
@@ -58,19 +58,16 @@ namespace IsaacWattsInventorySystem.models
             if (!Object.ReferenceEquals(null, product)) { this.product = product; }
         }
 
-        public void deleteProduct(int productPosition)
-        {
-            products.RemoveAt(productPosition);
+        public static void addAssociatedPart(Part partData) {
+        
         }
 
-        public void addProduct(Product product)
-        {
-            products.Add(new Product(product));
+        public static bool removeAssociatedPart(int partIndex) {
+            return false;
+        }
+        public static Part lookupAssociatedPart(int partIndex) {
+            return Part.parts[partIndex];
         }
 
-        public void modifyProduct(int productPosition, Product product)
-        {
-            products[productPosition] = new Product(product);
-        }
     }
 }

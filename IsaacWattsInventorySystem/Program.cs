@@ -13,7 +13,7 @@ namespace IsaacWattsInventorySystem
             // ApplicationConfiguration.Initialize();
             // TO DO
             // Init - Data from SQL to Global
-            Application.Run(new InventoryView());
+            Application.Run(new Inventory());
         }
     }
 }
