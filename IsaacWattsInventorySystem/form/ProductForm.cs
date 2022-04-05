@@ -66,7 +66,6 @@ namespace IsaacWattsInventorySystem.forms
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-
             if (dataGridRowIndex > 0)
             {
                 dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
