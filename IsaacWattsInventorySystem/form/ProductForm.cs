@@ -68,8 +68,8 @@ namespace IsaacWattsInventorySystem.forms
         {
             if (dataGridRowIndex > 0)
             {
-                dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
-                {
+                // dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
+                var updatedProduct = new Product {
                     ProductID = int.Parse(this.productIDInput.Text),
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -83,8 +83,8 @@ namespace IsaacWattsInventorySystem.forms
             else
             {
                 int newID = Globals.maxGlobalProductID;
-                dataGridProducts.Rows.Add(new Product
-                {
+                // dataGridProducts.Rows.Add(new Product
+                var newProduct = new Product {
                     ProductID = newID,
                     Name = this.productNameInput.Text,
                     Price = float.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),

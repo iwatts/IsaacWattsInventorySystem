@@ -106,8 +106,8 @@ namespace IsaacWattsInventorySystem.forms
                 }
                 else
                 {
-                    dataGridParts.Rows[dataGridRowIndex].SetValues(new InHouse
-                    {
+                    // dataGridParts.Rows[dataGridRowIndex].SetValues(new InHouse
+                    var updatedInHousePart = new InHouse {
                         PartID = int.Parse(this.partIDInput.Text),
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -124,8 +124,8 @@ namespace IsaacWattsInventorySystem.forms
                 int newID = Globals.maxGlobalPartID;
                 if (CompanyNameButton.Checked)
                 {
-                    dataGridParts.Rows.Add(new Outsource
-                    {
+                    // dataGridParts.Rows.Add(new Outsource
+                    var newOutsourcePart = new Outsource {
                         PartID = newID,
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
@@ -138,8 +138,8 @@ namespace IsaacWattsInventorySystem.forms
                 }
                 else
                 {
-                    dataGridParts.Rows.Add(new InHouse
-                    {
+                    // dataGridParts.Rows.Add(new InHouse
+                    var newInHousePart = new InHouse {
                         PartID = newID,
                         Name = this.partNameInput.Text,
                         Price = float.Parse(this.partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),

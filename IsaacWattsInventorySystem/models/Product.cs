@@ -20,6 +20,39 @@ namespace IsaacWattsInventorySystem.models
         public static BindingList<Product> products = new BindingList<Product>();
         private Product product;
 
+        static Product()
+        {
+            products.Add(new Product{
+                ProductID = 0,
+                Name = "Blue Bike",
+                Price = 12.00f,
+                InStock = 3,
+                Min = 1,
+                Max = 10,
+                AssociatedParts = new BindingList<Part>(Part.parts.Where(data => (data.PartID == 1 || data.PartID == 3)).ToList())
+            });
+            products.Add(new Product
+            {
+                ProductID = 1,
+                Name = "Red Bike",
+                Price = 16.00f,
+                InStock = 8,
+                Min = 1,
+                Max = 50,
+                AssociatedParts = new BindingList<Part>(Part.parts.Where(data => (data.PartID == 1 || data.PartID == 2)).ToList())
+            });
+            products.Add(new Product
+            {
+                ProductID = 2,
+                Name = "Green Bike",
+                Price = 18.00f,
+                InStock = 8,
+                Min = 1,
+                Max = 20,
+                AssociatedParts = new BindingList<Part>(Part.parts.Where(data => (data.PartID == 0 || data.PartID == 3)).ToList())
+            });
+        }
+
         public Product(Product product = null)
         {
             if (!Object.ReferenceEquals(null, product)) { this.product = product; }
