@@ -78,6 +78,7 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
                 };
+                Inventory.updateProduct(dataGridRowIndex, updatedProduct);
 
             }
             else
@@ -93,8 +94,9 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productParts
                 };
-                Globals.maxGlobalProductID++;
+                Inventory.addProduct(newProduct);
             }
+            Globals.maxGlobalProductID++;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
