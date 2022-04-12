@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IsaacWattsInventorySystem.models
 {
-    public class Globals
+    public static class Globals
     {
-        public static int maxGlobalProductID { get; set; } = 0;
-        public static int maxGlobalPartID { get; set; } = 0;
+        public static int maxGlobalProductID { get; set; } = 3;
+        public static int maxGlobalPartID { get; set; } = 6;
 
         public static bool confirmationPrompt(string message)
         {
@@ -21,6 +21,11 @@ namespace IsaacWattsInventorySystem.models
         {
             InHouse,
             OutSource
+        }
+
+        public static bool partialStringMatch(this string source, string toCheck, StringComparison comp)
+        {
+            return source.IndexOf(toCheck, comp) >= 0;
         }
     }
 }

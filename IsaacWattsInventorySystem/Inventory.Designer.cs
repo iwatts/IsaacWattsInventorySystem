@@ -41,8 +41,10 @@
             this.ExitButton = new System.Windows.Forms.Button();
             this.textSearchProduct = new System.Windows.Forms.TextBox();
             this.searchProduct = new System.Windows.Forms.Button();
-            this.searchPart = new System.Windows.Forms.Button();
+            this.searchProduct.Click += new System.EventHandler(this.findProductButton_Click);
             this.textSearchPart = new System.Windows.Forms.TextBox();
+            this.searchPart = new System.Windows.Forms.Button();
+            this.searchPart.Click += new System.EventHandler(this.findPartButton_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridParts)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +68,7 @@
             this.dataGridParts.RowHeadersWidth = 51;
             this.dataGridParts.Size = new System.Drawing.Size(521, 360);
             this.dataGridParts.TabIndex = 1;
+            this.dataGridParts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PartEditCell);
             this.dataGridParts.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.PartsBindingComplete);
             // 
             // Delete

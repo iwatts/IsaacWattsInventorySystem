@@ -1,5 +1,6 @@
 using IsaacWattsInventorySystem.forms;
 using IsaacWattsInventorySystem.models;
+using System.ComponentModel;
 
 namespace IsaacWattsInventorySystem
 {
@@ -86,14 +87,30 @@ namespace IsaacWattsInventorySystem
             this.modifyProductButton_Click(sender, e);
         }
 
+        private void findProductButton_Click(object sender, EventArgs e)
+        {
+            string searchProductValue = this.textSearchProduct.Text;
+            BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
+                .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
+            if (filteredProductsBindingList.Count > 0)
+            {
+                dataGridProducts.DataSource = filteredProductsBindingList;
+            }
+            else
+            {
+                dataGridProducts.DataSource = Part.parts;
+                MessageBox.Show("Part Not Found");
+            }
+        }
+
         private void modifyProductButton_Click(object sender, EventArgs e)
         {
-            // load "modify" product form (create form with inputs loaded from selected product)
+            // load product form (add product data to modify and include index)
             if (dataGridProducts.RowCount > 0 && dataGridProducts.CurrentRow.Selected)
             {
-                int productID = (int)dataGridProducts.CurrentRow.Cells["ProductID"].Value;
+                int productIndex = (int)dataGridProducts.CurrentRow.Index;
                 Product productData = (Product)dataGridProducts.CurrentRow.DataBoundItem;
-                ProductForm modifyProduct = new ProductForm(productID, productData);
+                ProductForm modifyProduct = new ProductForm(productIndex, productData);
                 modifyProduct.Owner = this;
                 modifyProduct.Show();
             }
@@ -127,7 +144,7 @@ namespace IsaacWattsInventorySystem
                     bool productRemoved = removeProduct(index);
                     if (productRemoved)
                     {
-                        MessageBox.Show("Product Removed");
+                        MessageBox.Show("Product Deleted");
                     }
                 }
             }
@@ -144,14 +161,31 @@ namespace IsaacWattsInventorySystem
             // Double click to edit selected part
             this.modifyPartButton_Click(sender, e);
         }
+
+        private void findPartButton_Click(object sender, EventArgs e)
+        {
+            string searPartValue = this.textSearchPart.Text;
+            BindingList<Part> filteredPartsBindingList = new BindingList<Part>(Part.parts.Where(
+                partData => partData.Name.partialStringMatch(searPartValue, StringComparison.OrdinalIgnoreCase))
+                .ToList());
+            if(filteredPartsBindingList.Count > 0)
+            {
+                dataGridParts.DataSource = filteredPartsBindingList;
+            } else
+            {
+                dataGridParts.DataSource = Part.parts;
+                MessageBox.Show("Part Not Found");
+            }
+
+        }
         private void modifyPartButton_Click(object sender, EventArgs e)
         {
             // load "modify" part form (create form with inputs loaded from selected part)
             if (dataGridParts.RowCount > 0 && dataGridParts.CurrentRow.Selected)
             {
-                int partID = (int)dataGridParts.CurrentRow.Cells["PartID"].Value;
+                int partIndex = (int)dataGridParts.CurrentRow.Index;
                 Part partData = (Part)dataGridParts.CurrentRow.DataBoundItem;
-                PartForm modifyPart = new PartForm(partID, partData, dataGridParts.CurrentRow.Index);
+                PartForm modifyPart = new PartForm(partIndex, partData, dataGridParts.CurrentRow.Index);
                 modifyPart.Owner = this;
                 modifyPart.Show();
             }
@@ -182,7 +216,11 @@ namespace IsaacWattsInventorySystem
                 if (Globals.confirmationPrompt(promptMessage))
                 {
                     int index = dataGridParts.CurrentRow.Index;
-                    Part.parts.RemoveAt(index);
+                    bool partRemoved = removePart(index);
+                    if (partRemoved)
+                    {
+                        MessageBox.Show("Part Deleted");
+                    }
                 }
             }
             else

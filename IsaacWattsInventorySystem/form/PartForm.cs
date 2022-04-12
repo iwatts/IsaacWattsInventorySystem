@@ -5,13 +5,13 @@ namespace IsaacWattsInventorySystem.forms
 {
     public partial class PartForm : Form
     {
-        private int dataGridRowIndex { get; set; }
+        private int partIndex { get; set; }
         public PartForm(int partID, Part partData, int rowIndex = -1)
         {
             InitializeComponent();
 
             partIDInput.Text = partID.ToString();
-            dataGridRowIndex = rowIndex;
+            partIndex = rowIndex;
             dynamic typedPartData = null;
             if (partData is Part)
             {
@@ -87,7 +87,7 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if (dataGridRowIndex > 0)
+            if (partIndex > 0)
             {
                 if (CompanyNameButton.Checked)
                 {
@@ -102,7 +102,7 @@ namespace IsaacWattsInventorySystem.forms
                         CompanyName = this.companyNameInput.Text
                     };
                     // inventory.updatePart(updatedOutsourcePart)
-                    Inventory.updatePart(dataGridRowIndex, updatedOutsourcePart);
+                    Inventory.updatePart(partIndex, updatedOutsourcePart);
                 }
                 else
                 {
@@ -117,7 +117,7 @@ namespace IsaacWattsInventorySystem.forms
                         SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
                     };
-                    Inventory.updatePart(dataGridRowIndex, updatedInHousePart);
+                    Inventory.updatePart(partIndex, updatedInHousePart);
                 }
             }
             else

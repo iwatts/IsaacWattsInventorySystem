@@ -6,17 +6,14 @@ namespace IsaacWattsInventorySystem.forms
 {
     public partial class ProductForm : Form
     {
-        private BindingList<Part> productParts;
-        private int dataGridRowIndex { get; set; }
-        public List<Part> backupPartList { get; private set; }
+        private static BindingList<Part>? productPartsNew;
+        private int productIndex { get; set; }
 
         public ProductForm(int productID, Product productData, int rowIndex = -1)
         {
             InitializeComponent();
 
             productIDInput.Text = productID.ToString();
-            int dataGridRowIndex = rowIndex;
-            List<Part> backupPartList = null;
 
             if (productData is Product)
             {
@@ -27,15 +24,13 @@ namespace IsaacWattsInventorySystem.forms
                 productMinInput.Text = productData.Min.ToString();
                 productMaxInput.Text = productData.Max.ToString();
 
-                productParts = new BindingList<Part>(productData.AssociatedParts);
-                productPartsGrid.DataSource = productParts;
-
-                backupPartList = new List<Part>(productParts);
-
+                productPartsNew = new BindingList<Part>(productData.AssociatedParts.ToList());
+                productPartsGrid.DataSource = productPartsNew;
             }
 
             BindingSource allPartItems = new BindingSource();
-            allPartItems.DataSource = productPartsGrid.DataSource;
+            allPartItems.DataSource = Part.parts;
+
 
 
             allPartsGrid.DataSource = allPartItems;
@@ -46,27 +41,85 @@ namespace IsaacWattsInventorySystem.forms
 
         }
 
-        private void addPartToProduct(object sender, DataGridViewCellEventArgs e)
+        public static void addPart(Part partData)
+        {
+            productPartsNew.Add(partData);
+            productPartsNew.ResetBindings();
+        }
+        public static bool removePart(int partIndex)
+        {
+            if (lookupPart(partIndex) is Part)
+            {
+                productPartsNew.RemoveAt(partIndex);
+                productPartsNew.ResetBindings();
+                return true;
+            }
+            return false;
+        }
+
+        public static Part lookupPart(int partIndex)
+        {
+            return Part.parts[partIndex];
+        }
+
+        private void addPartToProduct_click(object sender, DataGridViewCellEventArgs e)
         {
             if (allPartsGrid.CurrentRow.Selected)
             {
                 Part partData = (Part)allPartsGrid.CurrentRow.DataBoundItem;
-                productParts.Add(partData);
+                addPart(partData);
             }
         }
 
-        private void removePartFromProdcut(object sender, DataGridViewCellEventArgs e)
+        private void removePartFromProdcut_click(object sender, DataGridViewCellEventArgs e)
         {
             if (productPartsGrid.CurrentRow.Selected)
             {
-                DataGridViewRow removeRow = productPartsGrid.CurrentRow;
-                productPartsGrid.Rows.Remove(removeRow);
+                int removeIndex = productPartsGrid.CurrentRow.Index;
+                removePart(removeIndex);
+            }
+        }
+
+        private void filterAllParts_Click(object sender, EventArgs e)
+        {
+            string searchProductValue = this.searchAllParts.Text;
+            BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
+                .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
+            if (filteredProductsBindingList.Count > 0)
+            {
+                allPartsGrid.DataSource = filteredProductsBindingList;
+            }
+            else
+            {
+                allPartsGrid.DataSource = Part.parts;
+                MessageBox.Show("Part Not Found");
+            }
+        }
+
+        private void filterProductParts_Click(object sender, EventArgs e)
+        {
+            string searchProductValue = this.searchAllParts.Text;
+            BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
+                .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
+            if (filteredProductsBindingList.Count > 0)
+            {
+                productPartsGrid.DataSource = filteredProductsBindingList;
+            }
+            else
+            {
+                productPartsGrid.DataSource = productPartsNew;
+                MessageBox.Show("Part Not Found");
             }
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (dataGridRowIndex > 0)
+            if(productPartsNew.Count < 0)
+            {
+                MessageBox.Show("Product Requires Parts");
+                return;
+            }
+            if (productIndex > 0)
             {
                 // dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
                 var updatedProduct = new Product {
@@ -76,9 +129,9 @@ namespace IsaacWattsInventorySystem.forms
                     InStock = int.Parse(this.ProductStockInput.Text),
                     Min = int.Parse(this.productMinInput.Text),
                     Max = int.Parse(this.productMaxInput.Text),
-                    AssociatedParts = productParts
+                    AssociatedParts = productPartsNew
                 };
-                Inventory.updateProduct(dataGridRowIndex, updatedProduct);
+                Inventory.updateProduct(productIndex, updatedProduct);
 
             }
             else
@@ -92,19 +145,16 @@ namespace IsaacWattsInventorySystem.forms
                     InStock = int.Parse(this.ProductStockInput.Text),
                     Min = int.Parse(this.productMinInput.Text),
                     Max = int.Parse(this.productMaxInput.Text),
-                    AssociatedParts = productParts
+                    AssociatedParts = productPartsNew
                 };
                 Inventory.addProduct(newProduct);
+                Globals.maxGlobalProductID++;
             }
-            Globals.maxGlobalProductID++;
+            this.Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if (backupPartList is List<Part>)
-            {
-                productParts = new BindingList<Part>(backupPartList);
-            }
             this.Close();
         }
 
