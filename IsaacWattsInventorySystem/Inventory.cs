@@ -108,9 +108,9 @@ namespace IsaacWattsInventorySystem
             // load product form (add product data to modify and include index)
             if (dataGridProducts.RowCount > 0 && dataGridProducts.CurrentRow.Selected)
             {
-                int productIndex = (int)dataGridProducts.CurrentRow.Index;
+                int productIndex = dataGridProducts.CurrentRow.Index;
                 Product productData = (Product)dataGridProducts.CurrentRow.DataBoundItem;
-                ProductForm modifyProduct = new ProductForm(productIndex, productData);
+                ProductForm modifyProduct = new ProductForm(productIndex, productData, productIndex);
                 modifyProduct.Owner = this;
                 modifyProduct.Show();
             }
@@ -183,9 +183,9 @@ namespace IsaacWattsInventorySystem
             // load "modify" part form (create form with inputs loaded from selected part)
             if (dataGridParts.RowCount > 0 && dataGridParts.CurrentRow.Selected)
             {
-                int partIndex = (int)dataGridParts.CurrentRow.Index;
+                int partIndex = dataGridParts.CurrentRow.Index;
                 Part partData = (Part)dataGridParts.CurrentRow.DataBoundItem;
-                PartForm modifyPart = new PartForm(partIndex, partData, dataGridParts.CurrentRow.Index);
+                PartForm modifyPart = new PartForm(partIndex, partData, partIndex);
                 modifyPart.Owner = this;
                 modifyPart.Show();
             }

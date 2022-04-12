@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace IsaacWattsInventorySystem.models
 {
@@ -10,6 +7,8 @@ namespace IsaacWattsInventorySystem.models
     {
         public static int maxGlobalProductID { get; set; } = 3;
         public static int maxGlobalPartID { get; set; } = 6;
+
+        public static List<ValidationResult> validationResults = new List<ValidationResult>();
 
         public static bool confirmationPrompt(string message)
         {
@@ -27,5 +26,21 @@ namespace IsaacWattsInventorySystem.models
         {
             return source.IndexOf(toCheck, comp) >= 0;
         }
+
+        public static bool validateObject<T>(T objectToValidate)
+        {
+            ValidationContext vc = new ValidationContext(objectToValidate);
+
+            ICollection<ValidationResult> results = new List<ValidationResult>();
+            bool isValid = Validator.TryValidateObject(objectToValidate, vc, results, true);
+            return isValid;
+        }
+
+        public static void errorListMessage()
+        {
+            string errorMessage = validationResults;
+            MessageBox.Show(errorMessage);
+        }
+
     }
 }

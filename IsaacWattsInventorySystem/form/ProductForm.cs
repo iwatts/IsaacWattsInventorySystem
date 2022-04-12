@@ -1,5 +1,6 @@
 ﻿using IsaacWattsInventorySystem.models;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace IsaacWattsInventorySystem.forms
@@ -14,6 +15,7 @@ namespace IsaacWattsInventorySystem.forms
             InitializeComponent();
 
             productIDInput.Text = productID.ToString();
+            productIndex = rowIndex;
 
             if (productData is Product)
             {
@@ -119,6 +121,9 @@ namespace IsaacWattsInventorySystem.forms
                 MessageBox.Show("Product Requires Parts");
                 return;
             }
+
+            
+
             if (productIndex > 0)
             {
                 // dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
@@ -131,7 +136,9 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productPartsNew
                 };
-                Inventory.updateProduct(productIndex, updatedProduct);
+                if (Globals.validateObject(updatedProduct)){
+                    Inventory.updateProduct(productIndex, updatedProduct);
+                }
 
             }
             else
@@ -147,8 +154,14 @@ namespace IsaacWattsInventorySystem.forms
                     Max = int.Parse(this.productMaxInput.Text),
                     AssociatedParts = productPartsNew
                 };
-                Inventory.addProduct(newProduct);
-                Globals.maxGlobalProductID++;
+                if (Globals.validateObject(newProduct))
+                {
+                    Inventory.addProduct(newProduct);
+                    Globals.maxGlobalProductID++;
+                } else
+                {
+
+                }
             }
             this.Close();
         }
