@@ -136,6 +136,7 @@ namespace IsaacWattsInventorySystem.forms
                         SourceType = Globals.sourceType.OutSource,
                         CompanyName = this.companyNameInput.Text
                     };
+                    Inventory.addPart(newOutsourcePart);
                 }
                 else
                 {
@@ -150,6 +151,7 @@ namespace IsaacWattsInventorySystem.forms
                         SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
                     };
+                    Inventory.addPart(newInHousePart);
                 }
                 Globals.maxGlobalPartID++;
 

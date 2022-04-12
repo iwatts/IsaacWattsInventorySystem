@@ -35,8 +35,17 @@ namespace IsaacWattsInventorySystem
 
         /***********  DATA FUNCTIONS ************/
 
-        public static void addProduct(Product productData) { }
+        public static void addProduct(Product productData) {
+            Product.products.Add(productData);
+            Product.products.ResetBindings();
+        }
         public static bool removeProduct(int productIndex) {
+            if (lookupProduct(productIndex) is Product)
+            {
+                Product.products.RemoveAt(productIndex);
+                Product.products.ResetBindings();
+                return true;
+            }
             return false;
         }
         public static Product lookupProduct(int productIndex) {
@@ -47,8 +56,17 @@ namespace IsaacWattsInventorySystem
             Product.products.ResetBindings();
         }
 
-        public static void addPart(Part partData) { }
+        public static void addPart(Part partData) {
+            Part.parts.Add(partData);
+            Part.parts.ResetBindings();
+        }
         public static bool removePart(int partIndex) {
+            if(lookupPart(partIndex) is Part)
+            {
+                Part.parts.RemoveAt(partIndex);
+                Part.parts.ResetBindings();
+                return true;
+            }
             return false;
         }
         public static Part lookupPart(int partIndex) {
@@ -106,7 +124,11 @@ namespace IsaacWattsInventorySystem
                 if (Globals.confirmationPrompt(promptMessage))
                 {
                     int index = dataGridProducts.CurrentRow.Index;
-                    Product.products.RemoveAt(index);
+                    bool productRemoved = removeProduct(index);
+                    if (productRemoved)
+                    {
+                        MessageBox.Show("Product Removed");
+                    }
                 }
             }
             else
