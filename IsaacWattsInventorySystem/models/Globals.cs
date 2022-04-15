@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace IsaacWattsInventorySystem.models
 {
@@ -31,14 +30,13 @@ namespace IsaacWattsInventorySystem.models
         {
             ValidationContext vc = new ValidationContext(objectToValidate);
 
-            ICollection<ValidationResult> results = new List<ValidationResult>();
-            bool isValid = Validator.TryValidateObject(objectToValidate, vc, results, true);
+            bool isValid = Validator.TryValidateObject(objectToValidate, vc, validationResults, true);
             return isValid;
         }
 
         public static void errorListMessage()
         {
-            string errorMessage = validationResults;
+            string errorMessage = string.Join("\n", validationResults);
             MessageBox.Show(errorMessage);
         }
 

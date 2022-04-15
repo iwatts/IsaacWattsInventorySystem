@@ -1,13 +1,12 @@
 ﻿using IsaacWattsInventorySystem.models;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace IsaacWattsInventorySystem.forms
 {
     public partial class ProductForm : Form
     {
-        private static BindingList<Part>? productPartsNew;
+        private static BindingList<Part>? productPartsNew = new BindingList<Part>();
         private int productIndex { get; set; }
 
         public ProductForm(int productID, Product productData, int rowIndex = -1)
@@ -84,7 +83,7 @@ namespace IsaacWattsInventorySystem.forms
 
         private void filterAllParts_Click(object sender, EventArgs e)
         {
-            string searchProductValue = this.searchAllParts.Text;
+            string searchProductValue = searchAllParts.Text;
             BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
                 .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
             if (filteredProductsBindingList.Count > 0)
@@ -100,7 +99,7 @@ namespace IsaacWattsInventorySystem.forms
 
         private void filterProductParts_Click(object sender, EventArgs e)
         {
-            string searchProductValue = this.searchAllParts.Text;
+            string searchProductValue = searchAllParts.Text;
             BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
                 .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
             if (filteredProductsBindingList.Count > 0)
@@ -116,24 +115,32 @@ namespace IsaacWattsInventorySystem.forms
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if(productPartsNew.Count < 0)
+            foreach (Control control in Controls)
             {
-                MessageBox.Show("Product Requires Parts");
+                control.Focus();
+                if (!Validate())
+                {
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+            }
+            if (productPartsNew is null || (productPartsNew.Count <= 0))
+            {
+                productPartsGrid.Focus();
+                errorProvider_Product.SetError(productPartsGrid, "Product requires minimum of 1 part!");
                 return;
             }
-
-            
 
             if (productIndex > 0)
             {
                 // dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
                 var updatedProduct = new Product {
-                    ProductID = int.Parse(this.productIDInput.Text),
-                    Name = this.productNameInput.Text,
-                    Price = decimal.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
-                    InStock = int.Parse(this.ProductStockInput.Text),
-                    Min = int.Parse(this.productMinInput.Text),
-                    Max = int.Parse(this.productMaxInput.Text),
+                    ProductID = int.Parse(productIDInput.Text),
+                    Name = productNameInput.Text,
+                    Price = decimal.Parse(productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    InStock = int.Parse(ProductStockInput.Text),
+                    Min = int.Parse(productMinInput.Text),
+                    Max = int.Parse(productMaxInput.Text),
                     AssociatedParts = productPartsNew
                 };
                 if (Globals.validateObject(updatedProduct)){
@@ -147,11 +154,11 @@ namespace IsaacWattsInventorySystem.forms
                 // dataGridProducts.Rows.Add(new Product
                 var newProduct = new Product {
                     ProductID = newID,
-                    Name = this.productNameInput.Text,
-                    Price = decimal.Parse(this.productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
-                    InStock = int.Parse(this.ProductStockInput.Text),
-                    Min = int.Parse(this.productMinInput.Text),
-                    Max = int.Parse(this.productMaxInput.Text),
+                    Name = productNameInput.Text,
+                    Price = decimal.Parse(productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    InStock = int.Parse(ProductStockInput.Text),
+                    Min = int.Parse(productMinInput.Text),
+                    Max = int.Parse(productMaxInput.Text),
                     AssociatedParts = productPartsNew
                 };
                 if (Globals.validateObject(newProduct))
@@ -163,14 +170,111 @@ namespace IsaacWattsInventorySystem.forms
 
                 }
             }
-            this.Close();
+            Close();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
+        private void productName_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(productNameInput.Text))
+            {
+                e.Cancel = true;
+                productNameInput.Focus();
+                errorProvider_Product.SetError(productNameInput, "Name should not be left blank!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Product.SetError(productNameInput, "");
+            }
+        }
 
+        private void priceInput_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(productPriceInput.Text))
+            {
+                e.Cancel = true;
+                productPriceInput.Focus();
+                errorProvider_Product.SetError(productPriceInput, "Price should not be left blank!");
+            }
+            else if (!decimal.TryParse(productPriceInput.Text, out decimal numberValue))
+            {
+                e.Cancel = true;
+                productPriceInput.Focus();
+                errorProvider_Product.SetError(productPriceInput, "Price value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Product.SetError(productPriceInput, "");
+            }
+        }
+
+        private void stockInput_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(ProductStockInput.Text))
+            {
+                e.Cancel = true;
+                ProductStockInput.Focus();
+                errorProvider_Product.SetError(ProductStockInput, "Stock should not be left blank!");
+            }
+            else if (!int.TryParse(ProductStockInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                ProductStockInput.Focus();
+                errorProvider_Product.SetError(ProductStockInput, "Stock value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Product.SetError(ProductStockInput, "");
+            }
+        }
+
+        private void minInput_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(productMinInput.Text))
+            {
+                e.Cancel = true;
+                productMinInput.Focus();
+                errorProvider_Product.SetError(productMinInput, "Minimum Amount should not be left blank!");
+            }
+            else if (!int.TryParse(productMinInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                productMinInput.Focus();
+                errorProvider_Product.SetError(productMinInput, "Minimum Amount value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Product.SetError(productMinInput, "");
+            }
+        }
+
+        private void maxInput_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(productMaxInput.Text))
+            {
+                e.Cancel = true;
+                productMaxInput.Focus();
+                errorProvider_Product.SetError(productMaxInput, "Maximum Amount should not be left blank!");
+            }
+            else if (!int.TryParse(productMaxInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                productMaxInput.Focus();
+                errorProvider_Product.SetError(productMaxInput, "Maximum Amount value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Product.SetError(productMaxInput, "");
+            }
+        }
     }
 }

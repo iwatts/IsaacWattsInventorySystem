@@ -29,6 +29,7 @@ namespace IsaacWattsInventorySystem.forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.allPartsGrid = new System.Windows.Forms.DataGridView();
             this.productPartsGrid = new System.Windows.Forms.DataGridView();
             this.allPartsLabel = new System.Windows.Forms.Label();
@@ -51,96 +52,99 @@ namespace IsaacWattsInventorySystem.forms
             this.searchAllParts = new System.Windows.Forms.Button();
             this.searchProductParts = new System.Windows.Forms.Button();
             this.searchProductPartsInput = new System.Windows.Forms.TextBox();
+            this.errorProvider_Product = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.allPartsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productPartsGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Product)).BeginInit();
             this.SuspendLayout();
             // 
             // allPartsGrid
             // 
             this.allPartsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.allPartsGrid.Location = new System.Drawing.Point(649, 43);
-            this.allPartsGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.allPartsGrid.Location = new System.Drawing.Point(568, 32);
+            this.allPartsGrid.Margin = new System.Windows.Forms.Padding(4);
             this.allPartsGrid.Name = "allPartsGrid";
             this.allPartsGrid.RowHeadersWidth = 51;
-            this.allPartsGrid.Size = new System.Drawing.Size(507, 280);
+            this.allPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.allPartsGrid.TabIndex = 0;
             this.allPartsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.addPartToProduct_click);
             // 
             // productPartsGrid
             // 
             this.productPartsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.productPartsGrid.Location = new System.Drawing.Point(649, 394);
-            this.productPartsGrid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productPartsGrid.Location = new System.Drawing.Point(568, 296);
+            this.productPartsGrid.Margin = new System.Windows.Forms.Padding(4);
             this.productPartsGrid.Name = "productPartsGrid";
             this.productPartsGrid.RowHeadersWidth = 51;
             this.productPartsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.productPartsGrid.Size = new System.Drawing.Size(507, 280);
+            this.productPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.productPartsGrid.TabIndex = 1;
             this.productPartsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.removePartFromProdcut_click);
             // 
             // allPartsLabel
             // 
             this.allPartsLabel.AutoSize = true;
-            this.allPartsLabel.Location = new System.Drawing.Point(649, 14);
+            this.allPartsLabel.Location = new System.Drawing.Point(568, 10);
             this.allPartsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.allPartsLabel.Name = "allPartsLabel";
-            this.allPartsLabel.Size = new System.Drawing.Size(62, 20);
+            this.allPartsLabel.Size = new System.Drawing.Size(50, 15);
             this.allPartsLabel.TabIndex = 2;
             this.allPartsLabel.Text = "All Parts";
             // 
             // productPartLabel
             // 
             this.productPartLabel.AutoSize = true;
-            this.productPartLabel.Location = new System.Drawing.Point(649, 365);
+            this.productPartLabel.Location = new System.Drawing.Point(568, 274);
             this.productPartLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productPartLabel.Name = "productPartLabel";
-            this.productPartLabel.Size = new System.Drawing.Size(95, 20);
+            this.productPartLabel.Size = new System.Drawing.Size(78, 15);
             this.productPartLabel.TabIndex = 3;
             this.productPartLabel.Text = "Product Parts";
             // 
             // productIDInput
             // 
-            this.productIDInput.Location = new System.Drawing.Point(99, 120);
-            this.productIDInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productIDInput.Location = new System.Drawing.Point(87, 90);
+            this.productIDInput.Margin = new System.Windows.Forms.Padding(4);
             this.productIDInput.Name = "productIDInput";
             this.productIDInput.ReadOnly = true;
-            this.productIDInput.Size = new System.Drawing.Size(132, 27);
+            this.productIDInput.Size = new System.Drawing.Size(116, 23);
             this.productIDInput.TabIndex = 4;
             // 
             // productIdLabel
             // 
             this.productIdLabel.AutoSize = true;
-            this.productIdLabel.Location = new System.Drawing.Point(17, 125);
+            this.productIdLabel.Location = new System.Drawing.Point(15, 94);
             this.productIdLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productIdLabel.Name = "productIdLabel";
-            this.productIdLabel.Size = new System.Drawing.Size(75, 20);
+            this.productIdLabel.Size = new System.Drawing.Size(60, 15);
             this.productIdLabel.TabIndex = 5;
             this.productIdLabel.Text = "ProductID";
             // 
             // partNameLabel
             // 
             this.partNameLabel.AutoSize = true;
-            this.partNameLabel.Location = new System.Drawing.Point(17, 182);
+            this.partNameLabel.Location = new System.Drawing.Point(15, 136);
             this.partNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.partNameLabel.Name = "partNameLabel";
-            this.partNameLabel.Size = new System.Drawing.Size(49, 20);
+            this.partNameLabel.Size = new System.Drawing.Size(39, 15);
             this.partNameLabel.TabIndex = 7;
             this.partNameLabel.Text = "Name";
             // 
             // productNameInput
             // 
-            this.productNameInput.Location = new System.Drawing.Point(99, 177);
-            this.productNameInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productNameInput.Location = new System.Drawing.Point(87, 133);
+            this.productNameInput.Margin = new System.Windows.Forms.Padding(4);
             this.productNameInput.Name = "productNameInput";
-            this.productNameInput.Size = new System.Drawing.Size(257, 27);
+            this.productNameInput.Size = new System.Drawing.Size(225, 23);
             this.productNameInput.TabIndex = 6;
+            this.productNameInput.Validating += new System.ComponentModel.CancelEventHandler(this.productName_Validating);
             // 
             // submitProductButton
             // 
-            this.submitProductButton.Location = new System.Drawing.Point(99, 603);
-            this.submitProductButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.submitProductButton.Location = new System.Drawing.Point(87, 452);
+            this.submitProductButton.Margin = new System.Windows.Forms.Padding(4);
             this.submitProductButton.Name = "submitProductButton";
-            this.submitProductButton.Size = new System.Drawing.Size(100, 35);
+            this.submitProductButton.Size = new System.Drawing.Size(88, 26);
             this.submitProductButton.TabIndex = 22;
             this.submitProductButton.Text = "Submit";
             this.submitProductButton.UseVisualStyleBackColor = true;
@@ -148,10 +152,10 @@ namespace IsaacWattsInventorySystem.forms
             // 
             // CancelProduct
             // 
-            this.CancelProduct.Location = new System.Drawing.Point(219, 603);
-            this.CancelProduct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.CancelProduct.Location = new System.Drawing.Point(192, 452);
+            this.CancelProduct.Margin = new System.Windows.Forms.Padding(4);
             this.CancelProduct.Name = "CancelProduct";
-            this.CancelProduct.Size = new System.Drawing.Size(100, 35);
+            this.CancelProduct.Size = new System.Drawing.Size(88, 26);
             this.CancelProduct.TabIndex = 21;
             this.CancelProduct.Text = "Cancel";
             this.CancelProduct.UseVisualStyleBackColor = true;
@@ -160,116 +164,124 @@ namespace IsaacWattsInventorySystem.forms
             // productPriceLabel
             // 
             this.productPriceLabel.AutoSize = true;
-            this.productPriceLabel.Location = new System.Drawing.Point(17, 246);
+            this.productPriceLabel.Location = new System.Drawing.Point(15, 184);
             this.productPriceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productPriceLabel.Name = "productPriceLabel";
-            this.productPriceLabel.Size = new System.Drawing.Size(41, 20);
+            this.productPriceLabel.Size = new System.Drawing.Size(33, 15);
             this.productPriceLabel.TabIndex = 24;
             this.productPriceLabel.Text = "Price";
             // 
             // productPriceInput
             // 
-            this.productPriceInput.Location = new System.Drawing.Point(99, 242);
-            this.productPriceInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productPriceInput.Location = new System.Drawing.Point(87, 182);
+            this.productPriceInput.Margin = new System.Windows.Forms.Padding(4);
             this.productPriceInput.Name = "productPriceInput";
-            this.productPriceInput.Size = new System.Drawing.Size(132, 27);
+            this.productPriceInput.Size = new System.Drawing.Size(116, 23);
             this.productPriceInput.TabIndex = 23;
+            this.productPriceInput.Validating += new System.ComponentModel.CancelEventHandler(this.priceInput_Validating);
             // 
             // inStockLabel
             // 
             this.inStockLabel.AutoSize = true;
-            this.inStockLabel.Location = new System.Drawing.Point(17, 297);
+            this.inStockLabel.Location = new System.Drawing.Point(15, 223);
             this.inStockLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.inStockLabel.Name = "inStockLabel";
-            this.inStockLabel.Size = new System.Drawing.Size(61, 20);
+            this.inStockLabel.Size = new System.Drawing.Size(49, 15);
             this.inStockLabel.TabIndex = 26;
             this.inStockLabel.Text = "In Stock";
             // 
             // ProductStockInput
             // 
-            this.ProductStockInput.Location = new System.Drawing.Point(99, 292);
-            this.ProductStockInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ProductStockInput.Location = new System.Drawing.Point(87, 219);
+            this.ProductStockInput.Margin = new System.Windows.Forms.Padding(4);
             this.ProductStockInput.Name = "ProductStockInput";
-            this.ProductStockInput.Size = new System.Drawing.Size(132, 27);
+            this.ProductStockInput.Size = new System.Drawing.Size(116, 23);
             this.ProductStockInput.TabIndex = 25;
+            this.ProductStockInput.Validating += new System.ComponentModel.CancelEventHandler(this.stockInput_Validating);
             // 
             // productMinLabel
             // 
             this.productMinLabel.AutoSize = true;
-            this.productMinLabel.Location = new System.Drawing.Point(17, 358);
+            this.productMinLabel.Location = new System.Drawing.Point(15, 268);
             this.productMinLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productMinLabel.Name = "productMinLabel";
-            this.productMinLabel.Size = new System.Drawing.Size(34, 20);
+            this.productMinLabel.Size = new System.Drawing.Size(28, 15);
             this.productMinLabel.TabIndex = 28;
             this.productMinLabel.Text = "Min";
             // 
             // productMinInput
             // 
-            this.productMinInput.Location = new System.Drawing.Point(99, 354);
-            this.productMinInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productMinInput.Location = new System.Drawing.Point(87, 266);
+            this.productMinInput.Margin = new System.Windows.Forms.Padding(4);
             this.productMinInput.Name = "productMinInput";
-            this.productMinInput.Size = new System.Drawing.Size(132, 27);
+            this.productMinInput.Size = new System.Drawing.Size(116, 23);
             this.productMinInput.TabIndex = 27;
+            this.productMinInput.Validating += new System.ComponentModel.CancelEventHandler(this.minInput_Validating);
             // 
             // productMaxLabel
             // 
             this.productMaxLabel.AutoSize = true;
-            this.productMaxLabel.Location = new System.Drawing.Point(17, 412);
+            this.productMaxLabel.Location = new System.Drawing.Point(15, 309);
             this.productMaxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productMaxLabel.Name = "productMaxLabel";
-            this.productMaxLabel.Size = new System.Drawing.Size(37, 20);
+            this.productMaxLabel.Size = new System.Drawing.Size(30, 15);
             this.productMaxLabel.TabIndex = 30;
             this.productMaxLabel.Text = "Max";
             // 
             // productMaxInput
             // 
-            this.productMaxInput.Location = new System.Drawing.Point(99, 408);
-            this.productMaxInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.productMaxInput.Location = new System.Drawing.Point(87, 306);
+            this.productMaxInput.Margin = new System.Windows.Forms.Padding(4);
             this.productMaxInput.Name = "productMaxInput";
-            this.productMaxInput.Size = new System.Drawing.Size(132, 27);
+            this.productMaxInput.Size = new System.Drawing.Size(116, 23);
             this.productMaxInput.TabIndex = 29;
+            this.productMaxInput.Validating += new System.ComponentModel.CancelEventHandler(this.maxInput_Validating);
             // 
             // searchAllPartsInput
             // 
-            this.searchAllPartsInput.Location = new System.Drawing.Point(843, 7);
-            this.searchAllPartsInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchAllPartsInput.Location = new System.Drawing.Point(738, 5);
+            this.searchAllPartsInput.Margin = new System.Windows.Forms.Padding(4);
             this.searchAllPartsInput.Name = "searchAllPartsInput";
-            this.searchAllPartsInput.Size = new System.Drawing.Size(205, 27);
+            this.searchAllPartsInput.Size = new System.Drawing.Size(180, 23);
             this.searchAllPartsInput.TabIndex = 31;
             // 
             // searchAllParts
             // 
-            this.searchAllParts.Location = new System.Drawing.Point(1056, 3);
-            this.searchAllParts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchAllParts.Location = new System.Drawing.Point(924, 2);
+            this.searchAllParts.Margin = new System.Windows.Forms.Padding(4);
             this.searchAllParts.Name = "searchAllParts";
-            this.searchAllParts.Size = new System.Drawing.Size(100, 35);
+            this.searchAllParts.Size = new System.Drawing.Size(88, 26);
             this.searchAllParts.TabIndex = 32;
             this.searchAllParts.Text = "Search";
             this.searchAllParts.UseVisualStyleBackColor = true;
             // 
             // searchProductParts
             // 
-            this.searchProductParts.Location = new System.Drawing.Point(1056, 354);
-            this.searchProductParts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchProductParts.Location = new System.Drawing.Point(924, 266);
+            this.searchProductParts.Margin = new System.Windows.Forms.Padding(4);
             this.searchProductParts.Name = "searchProductParts";
-            this.searchProductParts.Size = new System.Drawing.Size(100, 35);
+            this.searchProductParts.Size = new System.Drawing.Size(88, 26);
             this.searchProductParts.TabIndex = 33;
             this.searchProductParts.Text = "Search";
             this.searchProductParts.UseVisualStyleBackColor = true;
             // 
             // searchProductPartsInput
             // 
-            this.searchProductPartsInput.Location = new System.Drawing.Point(843, 358);
-            this.searchProductPartsInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchProductPartsInput.Location = new System.Drawing.Point(738, 268);
+            this.searchProductPartsInput.Margin = new System.Windows.Forms.Padding(4);
             this.searchProductPartsInput.Name = "searchProductPartsInput";
-            this.searchProductPartsInput.Size = new System.Drawing.Size(205, 27);
+            this.searchProductPartsInput.Size = new System.Drawing.Size(180, 23);
             this.searchProductPartsInput.TabIndex = 34;
+            // 
+            // errorProvider_Product
+            // 
+            this.errorProvider_Product.ContainerControl = this;
             // 
             // ProductForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 692);
+            this.ClientSize = new System.Drawing.Size(1026, 519);
             this.Controls.Add(this.searchProductPartsInput);
             this.Controls.Add(this.searchProductParts);
             this.Controls.Add(this.searchAllParts);
@@ -292,11 +304,12 @@ namespace IsaacWattsInventorySystem.forms
             this.Controls.Add(this.allPartsLabel);
             this.Controls.Add(this.productPartsGrid);
             this.Controls.Add(this.allPartsGrid);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProductForm";
             this.Text = "ProductForm";
             ((System.ComponentModel.ISupportInitialize)(this.allPartsGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productPartsGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Product)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,5 +339,6 @@ namespace IsaacWattsInventorySystem.forms
         private System.Windows.Forms.Button searchAllParts;
         private System.Windows.Forms.Button searchProductParts;
         private System.Windows.Forms.TextBox searchProductPartsInput;
+        private ErrorProvider errorProvider_Product;
     }
 }
