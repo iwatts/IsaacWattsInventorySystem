@@ -87,6 +87,15 @@ namespace IsaacWattsInventorySystem.forms
 
         private void submitButton_Click(object sender, EventArgs e)
         {
+            foreach (Control control in Controls)
+            {
+                control.Focus();
+                if (!Validate())
+                {
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+            }
             if (partIndex > 0)
             {
                 if (CompanyNameButton.Checked)
@@ -157,6 +166,153 @@ namespace IsaacWattsInventorySystem.forms
 
             }
             Close();
+        }
+
+        private void partNameInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(partNameInput.Text))
+            {
+                e.Cancel = true;
+                partNameInput.Focus();
+                errorProvider_Part.SetError(partNameInput, "Name should not be left blank!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(partNameInput, "");
+            }
+        }
+
+        private void partPriceInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(partPriceInput.Text))
+            {
+                e.Cancel = true;
+                partPriceInput.Focus();
+                errorProvider_Part.SetError(partPriceInput, "Price should not be left blank!");
+            }
+            else if (!decimal.TryParse(partPriceInput.Text, out decimal numberValue))
+            {
+                e.Cancel = true;
+                partPriceInput.Focus();
+                errorProvider_Part.SetError(partPriceInput, "Price value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(partPriceInput, "");
+            }
+        }
+
+        private void stockInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(stockInput.Text))
+            {
+                e.Cancel = true;
+                stockInput.Focus();
+                errorProvider_Part.SetError(stockInput, "Stock should not be left blank!");
+            }
+            else if (!int.TryParse(stockInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                stockInput.Focus();
+                errorProvider_Part.SetError(stockInput, "Stock value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(stockInput, "");
+            }
+        }
+
+        private void partMinInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(partMinInput.Text))
+            {
+                e.Cancel = true;
+                partMinInput.Focus();
+                errorProvider_Part.SetError(partMinInput, "Minimum Amount should not be left blank!");
+            }
+            else if (!int.TryParse(partMinInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                partMinInput.Focus();
+                errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(partMinInput, "");
+            }
+        }
+
+        private void partMaxInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(partMaxInput.Text))
+            {
+                e.Cancel = true;
+                partMaxInput.Focus();
+                errorProvider_Part.SetError(partMaxInput, "Maximum Amount should not be left blank!");
+            }
+            else if (!int.TryParse(partMaxInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                partMaxInput.Focus();
+                errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(partMaxInput, "");
+            }
+        }
+
+        private void companyNameInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!CompanyNameButton.Checked)
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(companyNameInput, "");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(companyNameInput.Text))
+            {
+                e.Cancel = true;
+                companyNameInput.Focus();
+                errorProvider_Part.SetError(companyNameInput, "Company Name should not be left blank!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(companyNameInput, "");
+            }
+        }
+
+        private void machineIDInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!MachineIDButton.Checked)
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(machineIDInput, "");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(machineIDInput.Text))
+            {
+                e.Cancel = true;
+                machineIDInput.Focus();
+                errorProvider_Part.SetError(machineIDInput, "Machine ID should not be left blank!");
+            }
+            else if (!int.TryParse(machineIDInput.Text, out int numberValue))
+            {
+                e.Cancel = true;
+                machineIDInput.Focus();
+                errorProvider_Part.SetError(machineIDInput, "Machine ID value should be number!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider_Part.SetError(machineIDInput, "");
+            }
         }
     }
 }
