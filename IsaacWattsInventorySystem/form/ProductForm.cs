@@ -131,9 +131,8 @@ namespace IsaacWattsInventorySystem.forms
                 return;
             }
 
-            if (productIndex > 0)
+            if (productIndex >= 0)
             {
-                // dataGridProducts.Rows[dataGridRowIndex].SetValues(new Product
                 var updatedProduct = new Product {
                     ProductID = int.Parse(productIDInput.Text),
                     Name = productNameInput.Text,
@@ -144,6 +143,7 @@ namespace IsaacWattsInventorySystem.forms
                     AssociatedParts = productPartsNew
                 };
                 if (Globals.validateObject(updatedProduct)){
+                    // TODO: verify updatedProduct is correct
                     Inventory.updateProduct(productIndex, updatedProduct);
                 }
 
@@ -151,7 +151,6 @@ namespace IsaacWattsInventorySystem.forms
             else
             {
                 int newID = Globals.maxGlobalProductID;
-                // dataGridProducts.Rows.Add(new Product
                 var newProduct = new Product {
                     ProductID = newID,
                     Name = productNameInput.Text,

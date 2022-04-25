@@ -96,7 +96,7 @@ namespace IsaacWattsInventorySystem.forms
                     return;
                 }
             }
-            if (partIndex > 0)
+            if (partIndex >= 0)
             {
                 if (CompanyNameButton.Checked)
                 {

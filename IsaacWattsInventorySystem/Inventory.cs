@@ -215,8 +215,15 @@ namespace IsaacWattsInventorySystem
                 string promptMessage = "Are you sure you wish to delete Part: " + (string)dataGridParts.CurrentRow.Cells["Name"].Value;
                 if (Globals.confirmationPrompt(promptMessage))
                 {
-                    int index = dataGridParts.CurrentRow.Index;
-                    bool partRemoved = removePart(index);
+                    int partIndex = dataGridParts.CurrentRow.Index;
+                    int selectedPartID = (int)dataGridParts.CurrentRow.Cells["PartID"].Value;
+                    if (isPartInUse(selectedPartID))
+                    {
+                        MessageBox.Show("Part is in use and cannot be removed!");
+                        return;
+                    }
+
+                    bool partRemoved = removePart(partIndex);
                     if (partRemoved)
                     {
                         MessageBox.Show("Part Deleted");
@@ -228,6 +235,20 @@ namespace IsaacWattsInventorySystem
                 MessageBox.Show("Part Not Selected");
             }
 
+        }
+
+        private bool isPartInUse(int partID) {
+            foreach(Product product in Product.products)
+            {
+                for (int i = 0; i < product.AssociatedParts.Count; i++)
+                {
+                    if(product.AssociatedParts[i].PartID == partID)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
