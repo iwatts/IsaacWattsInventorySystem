@@ -29,7 +29,7 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 3,
                 Min = 1,
                 Max = 10,
-                AssociatedParts = new BindingList<Part>(Part.parts.Where(data => (data.PartID == 1 || data.PartID == 3 || data.PartID == 6)).ToList())
+                AssociatedParts = new BindingList<Part>(Part.parts.Where(data => (data.PartID == 1 || data.PartID == 3 || data.PartID == 4)).ToList())
             });
             products.Add(new Product
             {

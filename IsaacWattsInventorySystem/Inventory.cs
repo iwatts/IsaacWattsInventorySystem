@@ -99,7 +99,7 @@ namespace IsaacWattsInventorySystem
             else
             {
                 dataGridProducts.DataSource = Part.parts;
-                MessageBox.Show("Part Not Found");
+                MessageBox.Show("Part Not Found", "Error");
             }
         }
 
@@ -116,7 +116,7 @@ namespace IsaacWattsInventorySystem
             }
             else
             {
-                MessageBox.Show("Product Not Selected");
+                MessageBox.Show("Product Not Selected", "Error");
             }
         }
         private void addProductButton_Click(object sender, EventArgs e)
@@ -144,13 +144,13 @@ namespace IsaacWattsInventorySystem
                     bool productRemoved = removeProduct(index);
                     if (productRemoved)
                     {
-                        MessageBox.Show("Product Deleted");
+                        MessageBox.Show("Product Deleted", "Success");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Product Not Selected");
+                MessageBox.Show("Product Not Selected", "Error");
             }
 
         }
@@ -174,7 +174,7 @@ namespace IsaacWattsInventorySystem
             } else
             {
                 dataGridParts.DataSource = Part.parts;
-                MessageBox.Show("Part Not Found");
+                MessageBox.Show("Part Not Found", "Error");
             }
 
         }
@@ -191,7 +191,7 @@ namespace IsaacWattsInventorySystem
             }
             else
             {
-                MessageBox.Show("Part Not Selected");
+                MessageBox.Show("Part Not Selected", "Error");
             }
 
         }
@@ -219,20 +219,20 @@ namespace IsaacWattsInventorySystem
                     int selectedPartID = (int)dataGridParts.CurrentRow.Cells["PartID"].Value;
                     if (isPartInUse(selectedPartID))
                     {
-                        MessageBox.Show("Part is in use and cannot be removed!");
+                        MessageBox.Show("Part is in use and cannot be removed!", "Error");
                         return;
                     }
 
                     bool partRemoved = removePart(partIndex);
                     if (partRemoved)
                     {
-                        MessageBox.Show("Part Deleted");
+                        MessageBox.Show("Part Deleted", "Success");
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Part Not Selected");
+                MessageBox.Show("Part Not Selected", "Error");
             }
 
         }
