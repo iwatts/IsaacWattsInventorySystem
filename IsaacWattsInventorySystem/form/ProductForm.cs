@@ -27,6 +27,9 @@ namespace IsaacWattsInventorySystem.forms
 
                 productPartsNew = new BindingList<Part>(productData.AssociatedParts.ToList());
                 productPartsGrid.DataSource = productPartsNew;
+            } else
+            {
+                productPartsNew = new BindingList<Part>();
             }
 
             BindingSource allPartItems = new BindingSource();
@@ -63,32 +66,14 @@ namespace IsaacWattsInventorySystem.forms
             return Part.parts[partIndex];
         }
 
-        private void addPartToProduct_click(object sender, DataGridViewCellEventArgs e)
-        {
-            if (allPartsGrid.CurrentRow.Selected)
-            {
-                Part partData = (Part)allPartsGrid.CurrentRow.DataBoundItem;
-                addPart(partData);
-            }
-        }
-
-        private void removePartFromProdcut_click(object sender, DataGridViewCellEventArgs e)
-        {
-            if (productPartsGrid.CurrentRow.Selected)
-            {
-                int removeIndex = productPartsGrid.CurrentRow.Index;
-                removePart(removeIndex);
-            }
-        }
-
         private void filterAllParts_Click(object sender, EventArgs e)
         {
-            string searchProductValue = searchAllParts.Text;
-            BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
-                .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
-            if (filteredProductsBindingList.Count > 0)
+            string searchAllPartsValue = searchAllPartsInput.Text;
+            BindingList<Part> filteredAllParts = new BindingList<Part>(Part.parts
+                .Where(partData => partData.Name.partialStringMatch(searchAllPartsValue, StringComparison.OrdinalIgnoreCase)).ToList());
+            if (filteredAllParts.Count > 0)
             {
-                allPartsGrid.DataSource = filteredProductsBindingList;
+                allPartsGrid.DataSource = filteredAllParts;
             }
             else
             {
@@ -99,9 +84,9 @@ namespace IsaacWattsInventorySystem.forms
 
         private void filterProductParts_Click(object sender, EventArgs e)
         {
-            string searchProductValue = searchAllParts.Text;
-            BindingList<Product> filteredProductsBindingList = new BindingList<Product>(Product.products
-                .Where(productData => productData.Name.partialStringMatch(searchProductValue, StringComparison.OrdinalIgnoreCase)).ToList());
+            string searchAssociatedPartsValue = searchProductPartsInput.Text;
+            BindingList<Part> filteredProductsBindingList = new BindingList<Part>(productPartsNew
+                .Where(partData => partData.Name.partialStringMatch(searchAssociatedPartsValue, StringComparison.OrdinalIgnoreCase)).ToList());
             if (filteredProductsBindingList.Count > 0)
             {
                 productPartsGrid.DataSource = filteredProductsBindingList;
@@ -273,6 +258,32 @@ namespace IsaacWattsInventorySystem.forms
             {
                 e.Cancel = false;
                 errorProvider_Product.SetError(productMaxInput, "");
+            }
+        }
+
+        private void addPartButton_Click(object sender, EventArgs e)
+        {
+            if (allPartsGrid.CurrentRow.Selected)
+            {
+                Part partData = (Part)allPartsGrid.CurrentRow.DataBoundItem;
+                addPart(partData);
+            }
+            else
+            {
+                MessageBox.Show("Part Not Selected", "Error");
+            }
+        }
+
+        private void removePartButton_Click(object sender, EventArgs e)
+        {
+            if (productPartsGrid.CurrentRow.Selected)
+            {
+                int removeIndex = productPartsGrid.CurrentRow.Index;
+                removePart(removeIndex);
+            }
+            else
+            {
+                MessageBox.Show("Part Not Selected", "Error");
             }
         }
     }

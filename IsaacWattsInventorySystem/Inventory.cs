@@ -24,6 +24,15 @@ namespace IsaacWattsInventorySystem
 
         }
 
+        public BindingList<Product> products()
+        {
+            return Product.products;
+        }
+        public BindingList<Part> allParts()
+        {
+            return Part.parts;
+        }
+
         private void ProductsBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridProducts.ClearSelection();

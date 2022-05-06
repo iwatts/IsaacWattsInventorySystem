@@ -53,6 +53,8 @@ namespace IsaacWattsInventorySystem.forms
             this.searchProductParts = new System.Windows.Forms.Button();
             this.searchProductPartsInput = new System.Windows.Forms.TextBox();
             this.errorProvider_Product = new System.Windows.Forms.ErrorProvider(this.components);
+            this.addPartButton = new System.Windows.Forms.Button();
+            this.removePartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.allPartsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productPartsGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider_Product)).BeginInit();
@@ -64,10 +66,10 @@ namespace IsaacWattsInventorySystem.forms
             this.allPartsGrid.Location = new System.Drawing.Point(568, 32);
             this.allPartsGrid.Margin = new System.Windows.Forms.Padding(4);
             this.allPartsGrid.Name = "allPartsGrid";
+            this.allPartsGrid.ReadOnly = true;
             this.allPartsGrid.RowHeadersWidth = 51;
             this.allPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.allPartsGrid.TabIndex = 0;
-            this.allPartsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.addPartToProduct_click);
             // 
             // productPartsGrid
             // 
@@ -75,11 +77,11 @@ namespace IsaacWattsInventorySystem.forms
             this.productPartsGrid.Location = new System.Drawing.Point(568, 296);
             this.productPartsGrid.Margin = new System.Windows.Forms.Padding(4);
             this.productPartsGrid.Name = "productPartsGrid";
+            this.productPartsGrid.ReadOnly = true;
             this.productPartsGrid.RowHeadersWidth = 51;
             this.productPartsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.productPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.productPartsGrid.TabIndex = 1;
-            this.productPartsGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.removePartFromProdcut_click);
             // 
             // allPartsLabel
             // 
@@ -254,6 +256,7 @@ namespace IsaacWattsInventorySystem.forms
             this.searchAllParts.TabIndex = 32;
             this.searchAllParts.Text = "Search";
             this.searchAllParts.UseVisualStyleBackColor = true;
+            this.searchAllParts.Click += new System.EventHandler(this.filterAllParts_Click);
             // 
             // searchProductParts
             // 
@@ -264,6 +267,7 @@ namespace IsaacWattsInventorySystem.forms
             this.searchProductParts.TabIndex = 33;
             this.searchProductParts.Text = "Search";
             this.searchProductParts.UseVisualStyleBackColor = true;
+            this.searchProductParts.Click += new System.EventHandler(this.filterProductParts_Click);
             // 
             // searchProductPartsInput
             // 
@@ -277,11 +281,33 @@ namespace IsaacWattsInventorySystem.forms
             // 
             this.errorProvider_Product.ContainerControl = this;
             // 
+            // addPartButton
+            // 
+            this.addPartButton.Location = new System.Drawing.Point(486, 32);
+            this.addPartButton.Name = "addPartButton";
+            this.addPartButton.Size = new System.Drawing.Size(75, 23);
+            this.addPartButton.TabIndex = 35;
+            this.addPartButton.Text = "Add";
+            this.addPartButton.UseVisualStyleBackColor = true;
+            this.addPartButton.Click += new System.EventHandler(this.addPartButton_Click);
+            // 
+            // removePartButton
+            // 
+            this.removePartButton.Location = new System.Drawing.Point(486, 296);
+            this.removePartButton.Name = "removePartButton";
+            this.removePartButton.Size = new System.Drawing.Size(75, 23);
+            this.removePartButton.TabIndex = 36;
+            this.removePartButton.Text = "Remove";
+            this.removePartButton.UseVisualStyleBackColor = true;
+            this.removePartButton.Click += new System.EventHandler(this.removePartButton_Click);
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 519);
+            this.Controls.Add(this.removePartButton);
+            this.Controls.Add(this.addPartButton);
             this.Controls.Add(this.searchProductPartsInput);
             this.Controls.Add(this.searchProductParts);
             this.Controls.Add(this.searchAllParts);
@@ -340,5 +366,7 @@ namespace IsaacWattsInventorySystem.forms
         private System.Windows.Forms.Button searchProductParts;
         private System.Windows.Forms.TextBox searchProductPartsInput;
         private ErrorProvider errorProvider_Product;
+        private Button removePartButton;
+        private Button addPartButton;
     }
 }
