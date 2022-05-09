@@ -79,6 +79,9 @@ namespace IsaacWattsInventorySystem
             }
             return false;
         }
+        public static bool deletePart(Part partData) {
+            return false;
+        }
         public static Part lookupPart(int partIndex) {
             return Part.parts[partIndex];
         }
