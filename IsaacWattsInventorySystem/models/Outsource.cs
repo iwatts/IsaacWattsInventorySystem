@@ -18,7 +18,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 3,
                 Min = 1,
                 Max = 5,
-                SourceType = Globals.sourceType.OutSource,
                 CompanyName = "Something Metal Inc"
             });
             outsourceParts.Add(new Outsource
@@ -29,7 +28,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 13,
                 Min = 1,
                 Max = 4,
-                SourceType = Globals.sourceType.OutSource,
                 CompanyName = "Something Metal Inc"
             });
             outsourceParts.Add(new Outsource
@@ -40,7 +38,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 30,
                 Min = 1,
                 Max = 3,
-                SourceType = Globals.sourceType.OutSource,
                 CompanyName = "Something Metal Inc"
             });
 

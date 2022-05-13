@@ -15,12 +15,6 @@ namespace IsaacWattsInventorySystem.models
             return confirmationDialog == DialogResult.OK ? true : false;
         }
 
-        public enum sourceType
-        {
-            InHouse,
-            OutSource
-        }
-
         public static bool partialStringMatch(this string source, string toCheck, StringComparison comp)
         {
             return source.IndexOf(toCheck, comp) >= 0;

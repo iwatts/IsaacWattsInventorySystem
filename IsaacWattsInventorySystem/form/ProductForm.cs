@@ -16,6 +16,7 @@ namespace IsaacWattsInventorySystem.forms
             productIDInput.Text = productID.ToString();
             productIndex = rowIndex;
 
+
             if (productData is Product)
             {
                 //fill in form
@@ -159,6 +160,11 @@ namespace IsaacWattsInventorySystem.forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            errorProvider_Product.Clear();
+            while (Controls.Count > 0)
+            {
+                Controls[0].Dispose();
+            }
             Close();
         }
 

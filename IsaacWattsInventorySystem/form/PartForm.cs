@@ -1,4 +1,5 @@
 ﻿using IsaacWattsInventorySystem.models;
+using System.ComponentModel;
 using System.Globalization;
 
 namespace IsaacWattsInventorySystem.forms
@@ -21,7 +22,7 @@ namespace IsaacWattsInventorySystem.forms
                 stockInput.Text = partData.InStock.ToString();
                 partMinInput.Text = partData.Min.ToString();
                 partMaxInput.Text = partData.Max.ToString();
-                if (partData.SourceType == Globals.sourceType.OutSource)
+                if (partData.GetType() == typeof(Outsource))
                 {
                     typedPartData = partData as Outsource;
                 }
@@ -58,6 +59,11 @@ namespace IsaacWattsInventorySystem.forms
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            errorProvider_Part.Clear();
+            while (Controls.Count > 0)
+            {
+                Controls[0].Dispose();
+            }
             Close();
         }
 
@@ -107,7 +113,6 @@ namespace IsaacWattsInventorySystem.forms
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
-                        SourceType = Globals.sourceType.OutSource,
                         CompanyName = companyNameInput.Text
                     };
                     // inventory.updatePart(updatedOutsourcePart)
@@ -123,7 +128,6 @@ namespace IsaacWattsInventorySystem.forms
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
-                        SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
                     };
                     Inventory.updatePart(partIndex, updatedInHousePart);
@@ -142,7 +146,6 @@ namespace IsaacWattsInventorySystem.forms
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
-                        SourceType = Globals.sourceType.OutSource,
                         CompanyName = companyNameInput.Text
                     };
                     Inventory.addPart(newOutsourcePart);
@@ -157,7 +160,6 @@ namespace IsaacWattsInventorySystem.forms
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
-                        SourceType = Globals.sourceType.InHouse,
                         MachineID = int.Parse(machineIDInput.Text)
                     };
                     Inventory.addPart(newInHousePart);

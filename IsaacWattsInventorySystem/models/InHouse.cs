@@ -18,7 +18,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 3,
                 Min = 1,
                 Max = 5,
-                SourceType = Globals.sourceType.InHouse,
                 MachineID = 112
             });
             inhouseParts.Add(new InHouse
@@ -29,7 +28,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 3,
                 Min = 1,
                 Max = 5,
-                SourceType = Globals.sourceType.InHouse,
                 MachineID = 1138
             });
             inhouseParts.Add(new InHouse
@@ -40,7 +38,6 @@ namespace IsaacWattsInventorySystem.models
                 InStock = 3,
                 Min = 1,
                 Max = 5,
-                SourceType = Globals.sourceType.InHouse,
                 MachineID = 110
             });
 
