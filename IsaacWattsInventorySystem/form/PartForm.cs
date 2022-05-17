@@ -241,6 +241,12 @@ namespace IsaacWattsInventorySystem.forms
                 partMinInput.Focus();
                 errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be number!");
             }
+            else if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
+            {
+                e.Cancel = true;
+                partMinInput.Focus();
+                errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be smaller than Maximum Amount!");
+            }
             else
             {
                 e.Cancel = false;
@@ -261,6 +267,12 @@ namespace IsaacWattsInventorySystem.forms
                 e.Cancel = true;
                 partMaxInput.Focus();
                 errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be number!");
+            }
+            else if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
+            {
+                e.Cancel = true;
+                partMaxInput.Focus();
+                errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be greater than Minimum Amount!");
             }
             else
             {
