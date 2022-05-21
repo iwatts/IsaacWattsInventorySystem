@@ -225,6 +225,25 @@ namespace IsaacWattsInventorySystem.forms
                 e.Cancel = false;
                 errorProvider_Part.SetError(stockInput, "");
             }
+            if(!string.IsNullOrWhiteSpace(partMinInput.Text))
+            {
+
+                if (int.Parse(stockInput.Text) < int.Parse(partMinInput.Text))
+                {
+                    e.Cancel = true;
+                    stockInput.Focus();
+                    errorProvider_Part.SetError(stockInput, "Stock value should be greater than Minimum Amount!");
+                }
+            }
+            if (!string.IsNullOrWhiteSpace(partMaxInput.Text))
+            {
+                if (int.Parse(stockInput.Text) > int.Parse(partMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    stockInput.Focus();
+                    errorProvider_Part.SetError(stockInput, "Stock value should be smaller than Maximum Amount!");
+                }
+            }
         }
 
         private void partMinInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -241,16 +260,19 @@ namespace IsaacWattsInventorySystem.forms
                 partMinInput.Focus();
                 errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be number!");
             }
-            else if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
-            {
-                e.Cancel = true;
-                partMinInput.Focus();
-                errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be smaller than Maximum Amount!");
-            }
             else
             {
                 e.Cancel = false;
                 errorProvider_Part.SetError(partMinInput, "");
+            }
+            if (!string.IsNullOrWhiteSpace(partMaxInput.Text))
+            {
+                if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    partMinInput.Focus();
+                    errorProvider_Part.SetError(partMinInput, "Minimum Amount value should be smaller than Maximum Amount!");
+                }
             }
         }
 
@@ -268,16 +290,19 @@ namespace IsaacWattsInventorySystem.forms
                 partMaxInput.Focus();
                 errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be number!");
             }
-            else if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
-            {
-                e.Cancel = true;
-                partMaxInput.Focus();
-                errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be greater than Minimum Amount!");
-            }
             else
             {
                 e.Cancel = false;
                 errorProvider_Part.SetError(partMaxInput, "");
+            }
+            if (!string.IsNullOrWhiteSpace(partMinInput.Text))
+            {
+                if (int.Parse(partMinInput.Text) > int.Parse(partMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    partMaxInput.Focus();
+                    errorProvider_Part.SetError(partMaxInput, "Maximum Amount value should be greater than Minimum Amount!");
+                }
             }
         }
 

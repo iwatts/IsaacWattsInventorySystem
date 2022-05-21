@@ -70,6 +70,7 @@ namespace IsaacWattsInventorySystem.forms
             this.allPartsGrid.RowHeadersWidth = 51;
             this.allPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.allPartsGrid.TabIndex = 0;
+            this.allPartsGrid.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.allPartsGrid_DataBindingComplete);
             // 
             // productPartsGrid
             // 
@@ -82,6 +83,7 @@ namespace IsaacWattsInventorySystem.forms
             this.productPartsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.productPartsGrid.Size = new System.Drawing.Size(444, 210);
             this.productPartsGrid.TabIndex = 1;
+            this.productPartsGrid.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.productPartsGrid_DataBindingComplete);
             // 
             // allPartsLabel
             // 

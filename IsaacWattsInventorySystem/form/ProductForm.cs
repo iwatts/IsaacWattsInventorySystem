@@ -223,6 +223,25 @@ namespace IsaacWattsInventorySystem.forms
                 e.Cancel = false;
                 errorProvider_Product.SetError(ProductStockInput, "");
             }
+            if (!string.IsNullOrWhiteSpace(productMinInput.Text))
+            {
+                if (int.Parse(ProductStockInput.Text) < int.Parse(productMinInput.Text))
+                {
+                    e.Cancel = true;
+                    ProductStockInput.Focus();
+                    errorProvider_Product.SetError(ProductStockInput, "Stock value should be greater than Minimum Amount!");
+                }
+
+            }
+            if (!string.IsNullOrWhiteSpace(productMaxInput.Text))
+            {
+                if (int.Parse(ProductStockInput.Text) > int.Parse(productMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    ProductStockInput.Focus();
+                    errorProvider_Product.SetError(ProductStockInput, "Stock value should be smaller than Maximum Amount!");
+                }
+            }
         }
 
         private void minInput_Validating(object sender, CancelEventArgs e)
@@ -239,16 +258,19 @@ namespace IsaacWattsInventorySystem.forms
                 productMinInput.Focus();
                 errorProvider_Product.SetError(productMinInput, "Minimum Amount value should be number!");
             }
-            else if (int.Parse(productMinInput.Text) > int.Parse(productMaxInput.Text))
-            {
-                e.Cancel = true;
-                productMinInput.Focus();
-                errorProvider_Product.SetError(productMinInput, "Minimum Amount value should be smaller than Maximum Amount!");
-            }
             else
             {
                 e.Cancel = false;
                 errorProvider_Product.SetError(productMinInput, "");
+            }
+            if (!string.IsNullOrWhiteSpace(productMaxInput.Text))
+            {
+                if (int.Parse(productMinInput.Text) > int.Parse(productMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    productMinInput.Focus();
+                    errorProvider_Product.SetError(productMinInput, "Minimum Amount value should be smaller than Maximum Amount!");
+                }
             }
         }
 
@@ -266,16 +288,19 @@ namespace IsaacWattsInventorySystem.forms
                 productMaxInput.Focus();
                 errorProvider_Product.SetError(productMaxInput, "Maximum Amount value should be number!");
             }
-            else if (int.Parse(productMinInput.Text) > int.Parse(productMaxInput.Text))
-            {
-                e.Cancel = true;
-                productMaxInput.Focus();
-                errorProvider_Product.SetError(productMaxInput, "Maximum Amount value should be greater than Minimum Amount!");
-            }
             else
             {
                 e.Cancel = false;
                 errorProvider_Product.SetError(productMaxInput, "");
+            }
+            if (!string.IsNullOrWhiteSpace(productMaxInput.Text))
+            {
+                if (int.Parse(productMinInput.Text) > int.Parse(productMaxInput.Text))
+                {
+                    e.Cancel = true;
+                    productMaxInput.Focus();
+                    errorProvider_Product.SetError(productMaxInput, "Maximum Amount value should be greater than Minimum Amount!");
+                }
             }
         }
 
@@ -283,7 +308,8 @@ namespace IsaacWattsInventorySystem.forms
         {
             if (allPartsGrid.CurrentRow.Selected)
             {
-                Part partData = (Part)allPartsGrid.CurrentRow.DataBoundItem;
+                int selectedPartIndex = allPartsGrid.CurrentRow.Index;
+                Part partData = (Part)allPartsGrid.Rows[selectedPartIndex].DataBoundItem;
                 addPart(partData);
             }
             else
@@ -296,13 +322,35 @@ namespace IsaacWattsInventorySystem.forms
         {
             if (productPartsGrid.CurrentRow.Selected)
             {
-                int removeIndex = productPartsGrid.CurrentRow.Index;
-                removePart(removeIndex);
+                    string promptMessage = "Are you sure you wish to remove part: " + (string)productPartsGrid.CurrentRow.Cells["Name"].Value;
+                    if (Globals.confirmationPrompt(promptMessage))
+                    {
+                    int removePartIndex = productPartsGrid.CurrentRow.Index;
+                    bool partRemoved = removePart(removePartIndex);
+                    if (partRemoved)
+                    {
+                        MessageBox.Show("Part Removed", "Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Part Not Removed", "Error");
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Part Not Selected", "Error");
             }
+        }
+
+        private void allPartsGrid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            allPartsGrid.ClearSelection();
+        }
+
+        private void productPartsGrid_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            productPartsGrid.ClearSelection();
         }
     }
 }
