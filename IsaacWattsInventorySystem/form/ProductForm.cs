@@ -7,6 +7,7 @@ namespace IsaacWattsInventorySystem.forms
     public partial class ProductForm : Form
     {
         private static BindingList<Part>? productPartsNew = new BindingList<Part>();
+        private static BindingSource allPartItems = new BindingSource();
         private int productIndex { get; set; }
 
         public ProductForm(int productID, Product productData, int rowIndex = -1)
@@ -33,7 +34,6 @@ namespace IsaacWattsInventorySystem.forms
                 productPartsNew = new BindingList<Part>();
             }
 
-            BindingSource allPartItems = new BindingSource();
             allPartItems.DataSource = Part.parts;
 
 
@@ -43,6 +43,11 @@ namespace IsaacWattsInventorySystem.forms
             allPartsGrid.ReadOnly = true;
             allPartsGrid.MultiSelect = false;
             allPartsGrid.AllowUserToAddRows = false;
+
+            productPartsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            productPartsGrid.ReadOnly = true;
+            productPartsGrid.MultiSelect = false;
+            productPartsGrid.AllowUserToAddRows = false;
 
         }
 
@@ -309,8 +314,9 @@ namespace IsaacWattsInventorySystem.forms
             if (allPartsGrid.CurrentRow.Selected)
             {
                 int selectedPartIndex = allPartsGrid.CurrentRow.Index;
-                Part partData = (Part)allPartsGrid.Rows[selectedPartIndex].DataBoundItem;
+                Part partData = (Part)allPartItems[selectedPartIndex];
                 addPart(partData);
+                productPartsGrid.DataSource = productPartsNew;
             }
             else
             {
@@ -322,9 +328,9 @@ namespace IsaacWattsInventorySystem.forms
         {
             if (productPartsGrid.CurrentRow.Selected)
             {
-                    string promptMessage = "Are you sure you wish to remove part: " + (string)productPartsGrid.CurrentRow.Cells["Name"].Value;
-                    if (Globals.confirmationPrompt(promptMessage))
-                    {
+                string promptMessage = "Are you sure you wish to remove part: " + (string)productPartsGrid.CurrentRow.Cells["Name"].Value;
+                if (Globals.confirmationPrompt(promptMessage))
+                {
                     int removePartIndex = productPartsGrid.CurrentRow.Index;
                     bool partRemoved = removePart(removePartIndex);
                     if (partRemoved)
@@ -335,6 +341,7 @@ namespace IsaacWattsInventorySystem.forms
                     {
                         MessageBox.Show("Part Not Removed", "Error");
                     }
+                    productPartsGrid.DataSource = productPartsNew;
                 }
             }
             else
