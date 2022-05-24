@@ -17,7 +17,7 @@ namespace IsaacWattsInventorySystem.models
                 Price = 11.00m,
                 InStock = 3,
                 Min = 1,
-                Max = 5,
+                Max = 50,
                 CompanyName = "Something Metal Inc"
             });
             outsourceParts.Add(new Outsource
@@ -27,7 +27,7 @@ namespace IsaacWattsInventorySystem.models
                 Price = 10.00m,
                 InStock = 13,
                 Min = 1,
-                Max = 4,
+                Max = 40,
                 CompanyName = "Something Metal Inc"
             });
             outsourceParts.Add(new Outsource
@@ -37,7 +37,7 @@ namespace IsaacWattsInventorySystem.models
                 Price = 12.00m,
                 InStock = 30,
                 Min = 1,
-                Max = 3,
+                Max = 30,
                 CompanyName = "Something Metal Inc"
             });
 

@@ -153,6 +153,12 @@ namespace IsaacWattsInventorySystem
                 if (Globals.confirmationPrompt(promptMessage))
                 {
                     int index = dataGridProducts.CurrentRow.Index;
+                    int associatedPartLength = Product.products[index].AssociatedParts.Count;
+                    if(associatedPartLength > 0)
+                    {
+                        MessageBox.Show("Product has Associated Parts and cannot be deleted", "Error");
+                        return;
+                    }
                     bool productRemoved = removeProduct(index);
                     if (productRemoved)
                     {
