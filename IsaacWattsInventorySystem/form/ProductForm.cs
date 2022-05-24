@@ -115,12 +115,6 @@ namespace IsaacWattsInventorySystem.forms
                     return;
                 }
             }
-            if (productPartsNew is null || (productPartsNew.Count <= 0))
-            {
-                productPartsGrid.Focus();
-                errorProvider_Product.SetError(productPartsGrid, "Product requires minimum of 1 part!");
-                return;
-            }
 
             if (productIndex >= 0)
             {
