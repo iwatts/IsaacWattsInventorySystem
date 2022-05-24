@@ -124,10 +124,11 @@ namespace IsaacWattsInventorySystem.forms
 
             if (productIndex >= 0)
             {
+                var productPrice = string.Format("{0:#.00}", Convert.ToDecimal(productPriceInput.Text));
                 var updatedProduct = new Product {
                     ProductID = int.Parse(productIDInput.Text),
                     Name = productNameInput.Text,
-                    Price = decimal.Parse(productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    Price = decimal.Parse(productPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(ProductStockInput.Text),
                     Min = int.Parse(productMinInput.Text),
                     Max = int.Parse(productMaxInput.Text),
@@ -142,10 +143,12 @@ namespace IsaacWattsInventorySystem.forms
             else
             {
                 int newID = Globals.maxGlobalProductID;
+                var productPrice = string.Format("{0:#.00}", Convert.ToDecimal(productPriceInput.Text));
+
                 var newProduct = new Product {
                     ProductID = newID,
                     Name = productNameInput.Text,
-                    Price = decimal.Parse(productPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                    Price = decimal.Parse(productPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                     InStock = int.Parse(ProductStockInput.Text),
                     Min = int.Parse(productMinInput.Text),
                     Max = int.Parse(productMaxInput.Text),

@@ -104,12 +104,14 @@ namespace IsaacWattsInventorySystem.forms
             }
             if (partIndex >= 0)
             {
+                var partPrice = string.Format("{0:#.00}", Convert.ToDecimal(partPriceInput.Text));
+
                 if (CompanyNameButton.Checked)
                 {
                     Part updatedOutsourcePart = new Outsource {
                         PartID = int.Parse(partIDInput.Text),
                         Name = partNameInput.Text,
-                        Price = decimal.Parse(partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(partPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
@@ -124,7 +126,7 @@ namespace IsaacWattsInventorySystem.forms
                     var updatedInHousePart = new InHouse {
                         PartID = int.Parse(partIDInput.Text),
                         Name = partNameInput.Text,
-                        Price = decimal.Parse(partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(partPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
@@ -136,13 +138,16 @@ namespace IsaacWattsInventorySystem.forms
             else
             {
                 int newID = Globals.maxGlobalPartID;
+                var partPrice = string.Format("{0:#.00}", Convert.ToDecimal(partPriceInput.Text));
+
+
                 if (CompanyNameButton.Checked)
                 {
                     // dataGridParts.Rows.Add(new Outsource
                     var newOutsourcePart = new Outsource {
                         PartID = newID,
                         Name = partNameInput.Text,
-                        Price = decimal.Parse(partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(partPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
@@ -156,7 +161,7 @@ namespace IsaacWattsInventorySystem.forms
                     var newInHousePart = new InHouse {
                         PartID = newID,
                         Name = partNameInput.Text,
-                        Price = decimal.Parse(partPriceInput.Text, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
+                        Price = decimal.Parse(partPrice, NumberStyles.AllowCurrencySymbol | NumberStyles.Currency),
                         InStock = int.Parse(stockInput.Text),
                         Min = int.Parse(partMinInput.Text),
                         Max = int.Parse(partMaxInput.Text),
